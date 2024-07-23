@@ -1,0 +1,6 @@
+新建项目把这个文件夹直接拷贝过去就行了
+但要记得改一下固件库以及我自己写的库的路径的路径
+有其他要求去看固件库
+STM32F10x_StdPeriph_Lib_V3.5.0\Project\STM32F10x_StdPeriph_Template
+
+Debug里的下载设置也记得改一下
