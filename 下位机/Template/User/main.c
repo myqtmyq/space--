@@ -1,32 +1,38 @@
 #include "stm32f10x.h"
 
-void BSP_CAN_Init(void) {  
-    // Ê¹ÄÜCANÊ±ÖÓ
+void SystemCLK_Config()
+{
+    RCC_HSEConfig(RCC_HSE_ON);
+}
+
+void BSP_CAN_Init(void)
+{
+    // Ê¹ï¿½ï¿½CANÊ±ï¿½ï¿½
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
-    
-    // Ê¹ÄÜGPIOÊ±ÖÓ
+
+    // Ê¹ï¿½ï¿½GPIOÊ±ï¿½ï¿½
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-    
-    // ÅäÖÃCANÒý½Å£ºRX (PA11) ºÍ TX (PA12)
+
+    // ï¿½ï¿½ï¿½ï¿½CANï¿½ï¿½ï¿½Å£ï¿½RX (PA11) ï¿½ï¿½ TX (PA12)
     GPIO_InitTypeDef GPIO_InitStructure;
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
-    
+
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
-    
-    // ¸´Î»CANÍâÉè
+
+    // ï¿½ï¿½Î»CANï¿½ï¿½ï¿½ï¿½
     CAN_DeInit(CAN1);
-    
-    CAN_InitTypeDef       CAN_InitStructure;
+
+    CAN_InitTypeDef CAN_InitStructure;
     CAN_FilterInitTypeDef CAN_FilterInitStructure;
 
     CAN_StructInit(&CAN_InitStructure);
 
-    // CANµ¥Ôª³õÊ¼»¯
+    // CANï¿½ï¿½Ôªï¿½ï¿½Ê¼ï¿½ï¿½
     CAN_InitStructure.CAN_TTCM = DISABLE;
     CAN_InitStructure.CAN_ABOM = DISABLE;
     CAN_InitStructure.CAN_AWUM = DISABLE;
@@ -35,14 +41,14 @@ void BSP_CAN_Init(void) {
     CAN_InitStructure.CAN_TXFP = ENABLE;
     CAN_InitStructure.CAN_Mode = CAN_Mode_Normal;
 
-    // ÉèÖÃ²¨ÌØÂÊ
+    // ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½
     CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
     CAN_InitStructure.CAN_BS1 = CAN_BS1_3tq;
     CAN_InitStructure.CAN_BS2 = CAN_BS2_2tq;
-    CAN_InitStructure.CAN_Prescaler = 12;  //  (¼ÙÉèPCLK1 = 36MHz)
+    CAN_InitStructure.CAN_Prescaler = 12; //  (ï¿½ï¿½ï¿½ï¿½PCLK1 = 36MHz)
     CAN_Init(CAN1, &CAN_InitStructure);
 
-    // CANÂË²¨Æ÷³õÊ¼»¯
+    // CANï¿½Ë²ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
     CAN_FilterInitStructure.CAN_FilterNumber = 0;
     CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;
     CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_32bit;
@@ -52,18 +58,19 @@ void BSP_CAN_Init(void) {
     CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;
     CAN_FilterInitStructure.CAN_FilterFIFOAssignment = CAN_FilterFIFO0;
     CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
-    CAN_FilterInit(&CAN_FilterInitStructure); 
+    CAN_FilterInit(&CAN_FilterInitStructure);
 }
 
-// CANÏûÏ¢·¢ËÍ
-uint8_t CAN_SendMessage(uint32_t id, uint8_t* data, uint8_t length){
+// CANï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+uint8_t CAN_SendMessage(uint32_t id, uint8_t *data, uint8_t length)
+{
     CanTxMsg TxMessage;
     TxMessage.StdId = id;
     TxMessage.ExtId = 0x00;
     TxMessage.IDE = CAN_Id_Standard;
     TxMessage.RTR = CAN_RTR_Data;
     TxMessage.DLC = length;
-    for(uint8_t i = 0; i < length; i++)
+    for (uint8_t i = 0; i < length; i++)
     {
         TxMessage.Data[i] = data[i];
     }
@@ -71,23 +78,70 @@ uint8_t CAN_SendMessage(uint32_t id, uint8_t* data, uint8_t length){
     uint8_t mailbox = CAN_Transmit(CAN1, &TxMessage);
     uint32_t timeout = 0xFFFF;
 
-    //while((CAN_TransmitStatus(CAN1, mailbox) != CAN_TxStatus_Ok) && (timeout--));
-    
-    if(timeout == 0)
+    // while((CAN_TransmitStatus(CAN1, mailbox) != CAN_TxStatus_Ok) && (timeout--));
+
+    if (timeout == 0)
     {
-        return 0;  // ·¢ËÍÊ§°Ü
+        return 0; // ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
     }
 
-    return 1;  // ·¢ËÍ³É¹¦
+    return 1; // ï¿½ï¿½ï¿½Í³É¹ï¿½
 }
 
+// ç³»ç»Ÿæ—¶é’Ÿé…ç½®å‡½æ•°
+void SystemClock_Config(void)
+{
+    ErrorStatus HSEStartUpStatus;
 
-int main() {
-	
- 	BSP_CAN_Init();
-	uint8_t data[8] = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22};
+    // 1. å¯ç”¨HSE
+    RCC_HSEConfig(RCC_HSE_ON);
 
- 	while (1){
-		CAN_SendMessage(0x123, data, 8);
-	}
+    // 2. ç­‰å¾…HSEå‡†å¤‡å¥½
+    HSEStartUpStatus = RCC_WaitForHSEStartUp();
+    if (HSEStartUpStatus == SUCCESS)
+    {
+        // 3. é…ç½®Flashé¢„å–å’Œç­‰å¾…çŠ¶æ€
+        FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
+        FLASH_SetLatency(FLASH_Latency_2);
+
+        // 4. é…ç½®AHBã€APB1å’ŒAPB2æ€»çº¿æ—¶é’Ÿ
+        RCC_HCLKConfig(RCC_SYSCLK_Div1); // AHBä¸åˆ†é¢‘
+        RCC_PCLK2Config(RCC_HCLK_Div1);  // APB2ä¸åˆ†é¢‘
+        RCC_PCLK1Config(RCC_HCLK_Div2);  // APB1åˆ†é¢‘å› å­ï¼Œæœ€å¤§36 MHz
+
+        // 5. é…ç½®PLL
+        RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9); // PLL: 8 MHz * 9 = 72 MHz
+
+        // 6. å¯ç”¨PLL
+        RCC_PLLCmd(ENABLE);
+
+        // 7. ç­‰å¾…PLLå‡†å¤‡å¥½
+        while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
+            ;
+
+        // 8. é€‰æ‹©PLLä½œä¸ºç³»ç»Ÿæ—¶é’Ÿæº
+        RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
+
+        // 9. ç­‰å¾…PLLä½œä¸ºç³»ç»Ÿæ—¶é’Ÿæºç”Ÿæ•ˆ
+        while (RCC_GetSYSCLKSource() != 0x08)
+            ;
+    }
+    else
+    {
+        // HSEå¯åŠ¨å¤±è´¥ï¼Œå¤„ç†é”™è¯¯
+        while (1)
+            ;
+    }
+}
+
+int main()
+{
+    SystemClock_Config();
+    BSP_CAN_Init();
+    uint8_t data[8] = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22};
+
+    while (1)
+    {
+        CAN_SendMessage(0x123, data, 8);
+    }
 }
