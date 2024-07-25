@@ -3,6 +3,33 @@
 void SystemCLK_Config()
 {
     RCC_HSEConfig(RCC_HSE_ON);
+
+    uint8_t HSEStartUpStatus = RCC_WaitForHSEStartUp();
+    if (HSEStartUpStatus == SUCCESS)
+    {
+
+        RCC_HCLKConfig(RCC_SYSCLK_Div1); // AHB不分频
+        RCC_PCLK2Config(RCC_HCLK_Div1);  // APB2不分频
+        RCC_PCLK1Config(RCC_HCLK_Div2);  // APB1分频因子，最大36 MHz
+
+        RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9); // PLL: 8 MHz * 9 = 72 MHz
+
+        RCC_PLLCmd(ENABLE);
+
+        while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
+            ;
+
+        RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
+
+        while (RCC_GetSYSCLKSource() != 0x08)
+            ;
+    }
+    else
+    {
+        // HSE启动失败，处理错误
+        while (1)
+            ;
+    }
 }
 
 void BSP_CAN_Init(void)
@@ -88,55 +115,9 @@ uint8_t CAN_SendMessage(uint32_t id, uint8_t *data, uint8_t length)
     return 1; // ���ͳɹ�
 }
 
-// 系统时钟配置函数
-void SystemClock_Config(void)
-{
-    ErrorStatus HSEStartUpStatus;
-
-    // 1. 启用HSE
-    RCC_HSEConfig(RCC_HSE_ON);
-
-    // 2. 等待HSE准备好
-    HSEStartUpStatus = RCC_WaitForHSEStartUp();
-    if (HSEStartUpStatus == SUCCESS)
-    {
-        // 3. 配置Flash预取和等待状态
-        FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
-        FLASH_SetLatency(FLASH_Latency_2);
-
-        // 4. 配置AHB、APB1和APB2总线时钟
-        RCC_HCLKConfig(RCC_SYSCLK_Div1); // AHB不分频
-        RCC_PCLK2Config(RCC_HCLK_Div1);  // APB2不分频
-        RCC_PCLK1Config(RCC_HCLK_Div2);  // APB1分频因子，最大36 MHz
-
-        // 5. 配置PLL
-        RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9); // PLL: 8 MHz * 9 = 72 MHz
-
-        // 6. 启用PLL
-        RCC_PLLCmd(ENABLE);
-
-        // 7. 等待PLL准备好
-        while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
-            ;
-
-        // 8. 选择PLL作为系统时钟源
-        RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
-
-        // 9. 等待PLL作为系统时钟源生效
-        while (RCC_GetSYSCLKSource() != 0x08)
-            ;
-    }
-    else
-    {
-        // HSE启动失败，处理错误
-        while (1)
-            ;
-    }
-}
-
 int main()
 {
-    SystemClock_Config();
+    SystemCLK_Config();
     BSP_CAN_Init();
     uint8_t data[8] = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22};
 
