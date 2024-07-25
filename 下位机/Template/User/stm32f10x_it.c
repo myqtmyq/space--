@@ -228,8 +228,8 @@ void EXTI15_10_IRQHandler(void) {
  */
 /* USART1???? */
 void USART1_IRQHandler(void) {
-    if (USART_GetITStatus(USART1, UART1_ITFLAG) != RESET) {
-    }
+//    if (USART_GetITStatus(USART1, UART1_ITFLAG) != RESET) {
+  //  }
 }
 
 /**
@@ -239,6 +239,7 @@ void USART1_IRQHandler(void) {
  */
 /* USART2???? */
 void USART2_IRQHandler(void) {
+	/*
     if (USART_GetITStatus(USART2, UART2_ITFLAG) != RESET) {
 
         while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
@@ -247,10 +248,25 @@ void USART2_IRQHandler(void) {
         // USART_SendData(USART1,'B');
         USART_ClearITPendingBit(USART2, UART2_ITFLAG);
     }
+	*/
 }
 
 /**
  * @}
  */
+
+void USB_LP_CAN1_RX0_IRQHandler(void)
+{
+    CanRxMsg RxMessage;
+    if (CAN_GetITStatus(CAN1, CAN_IT_FMP0))
+    {
+        // ? FIFO0 ????
+        CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);
+
+
+        // ???????
+        CAN_ClearITPendingBit(CAN1, CAN_IT_FMP0);
+    }
+}
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
