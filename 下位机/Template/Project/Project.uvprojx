@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_LD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\User;..\Library\STM32F10x_StdPeriph_Driver\inc;..\Library\CMSIS\CM3;..\..\MyLibrary\inc;..\Driver\inc</IncludePath>
+              <IncludePath>..\User;..\Library\STM32F10x_StdPeriph_Driver\inc;..\Library\CMSIS\CM3;..\..\MyLibrary\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -536,26 +536,6 @@
               <FileName>stm32f10x_wwdg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Library\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Driver</GroupName>
-          <Files>
-            <File>
-              <FileName>Can.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Driver\src\Can.c</FilePath>
-            </File>
-            <File>
-              <FileName>Canopen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Driver\src\Canopen.c</FilePath>
-            </File>
-            <File>
-              <FileName>Systick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Driver\src\Systick.c</FilePath>
             </File>
           </Files>
         </Group>
