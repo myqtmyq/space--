@@ -338,3 +338,412 @@ typedef union
     uint8_t data[8];
   };
 };
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2032,
+        0x00,
+    };
+    uint32_t deceleration;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+} deceleration;
+
+/* @attention int32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2040,
+        0x00,
+    };
+    int32_t targetSpeed;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} targetSpeed;
+
+/* @attention int32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2041,
+        0x00,
+    };
+    int32_t targetLocation;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+};
+
+/* @attention int32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2042,
+        0x00,
+    };
+    int32_t locationChange;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} locationChange;
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2043,
+        0x00,
+    };
+    uint32_t targetTime;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} targetTime;
+
+/* @attention int32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2050,
+        0x00,
+    };
+    int32_t realSpeed;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} realSpeed;
+
+/* @attention int32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex = {
+        0x2051,
+        0x00,
+    };
+    int32_t realLocation;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} realLocation;
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2052,
+        0x00,
+    };
+    uint32_t realTime;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} realTime;
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2053,
+        0x00,
+    };
+    uint32_t realVoltage;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} realVoltage;
+
+/* @attention uint8_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2060,
+        0x00,
+    };
+    uint8_t closedCtrlEnabled;
+  };
+
+  struct
+  {
+    uint8_t data[5];
+  };
+
+} closedCtrlEnabled;
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2061,
+        0x00,
+    };
+    uint32_t lossSteps;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} lossSteps;
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2062,
+        0x00,
+    };
+    uint32_t lossWarnThreshold;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} lossWarnThreshold;
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2063,
+        0x00,
+    };
+    uint32_t lossStopThreshold;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} lossStopThreshold;
+
+/* @attention int32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2070,
+        0x00,
+    };
+    int32_t targetSpeedIO;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} targetSpeedIO;
+
+/* @attention int32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2071,
+        0x00,
+    };
+    int32_t locationChangeIO;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} locationChangeIO;
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2072,
+        0x00,
+    };
+    uint32_t timeChangeIO;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} timeChangeIO;
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2073,
+        0x00,
+    };
+    uint32_t accelerationIO;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} accelerationIO;
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2074,
+        0x00,
+    };
+    uint32_t decelerationIO;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} decelerationIO;
+
+/* @attention uint32_t*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2075,
+        0x00,
+    };
+    uint32_t maxSpeedIO;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} maxSpeedIO;
+
+/* @attention uint32_t
+    input_1 emergStop; input_2 direction; input_3 triggerORpwm
+    0 = raising edge
+    1 = falling edge
+    2 = high
+    3 = low
+    output_1_2(1:run 2:error)
+    0 = high
+    1 = low*/
+typedef union
+{
+  struct
+  {
+    operation operation_t;
+    wholeIndex wholeIndex_t = {
+        0x2076,
+        0x00,
+    };
+    uint8_t emergencyStop;
+    uint8_t direction;
+    uint8_t triggerORpwm;
+    uint8_t runningStatus;
+  };
+
+  struct
+  {
+    uint8_t data[8];
+  };
+
+} IOmode;
