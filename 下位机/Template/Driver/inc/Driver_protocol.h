@@ -10,4 +10,6 @@ typedef struct
   uint8_t offset;
 } ProtocolInfo;
 
+void protocolInit(protocolData *protocolData_t);
+uint8_t getOffset(uint16_t index);
 #endif

@@ -22,7 +22,7 @@ typedef union
 
   struct
   {
-    uint8_t data[5];
+    uint8_t data[8];
   };
 } fractionize;
 
@@ -40,7 +40,7 @@ typedef union
 
   struct
   {
-    uint8_t data[5];
+    uint8_t data[8];
   };
 } staticCurrent;
 
@@ -58,7 +58,7 @@ typedef union
 
   struct
   {
-    uint8_t data[5];
+    uint8_t data[8];
   };
 } dynamicCurrent;
 
@@ -76,7 +76,7 @@ typedef union
 
   struct
   {
-    uint8_t data[5];
+    uint8_t data[8];
   };
 
 } canID;
@@ -125,7 +125,7 @@ typedef union
 
   struct
   {
-    uint8_t data[6];
+    uint8_t data[8];
   };
 
 } controlBit;
@@ -148,7 +148,7 @@ typedef union
 
   struct
   {
-    uint8_t data[6];
+    uint8_t data[8];
   };
 } statusBit;
 
@@ -174,7 +174,7 @@ typedef union
 
   struct
   {
-    uint8_t data[5];
+    uint8_t data[8];
   };
 
 } motorMode;
@@ -478,7 +478,7 @@ typedef union
 
   struct
   {
-    uint8_t data[5];
+    uint8_t data[8];
   };
 
 } closedCtrlEnabled;
@@ -676,14 +676,14 @@ typedef union
 
 #define ProtocolListInfo \
   {                      \
-      {0x2000, 5},       \
-      {0x2001, 5},       \
-      {0x2002, 5},       \
-      {0x2010, 5},       \
+      {0x2000, 8},       \
+      {0x2001, 8},       \
+      {0x2002, 8},       \
+      {0x2010, 8},       \
       {0x2011, 8},       \
-      {0x6040, 6},       \
-      {0x6041, 6},       \
-      {0x2020, 5},       \
+      {0x6040, 8},       \
+      {0x6041, 8},       \
+      {0x2020, 8},       \
       {0x2023, 8},       \
       {0x2024, 8},       \
       {0x2021, 8},       \
@@ -699,7 +699,7 @@ typedef union
       {0x2051, 8},       \
       {0x2052, 8},       \
       {0x2053, 8},       \
-      {0x2060, 5},       \
+      {0x2060, 8},       \
       {0x2061, 8},       \
       {0x2062, 8},       \
       {0x2063, 8},       \
@@ -754,7 +754,7 @@ typedef union
 
   struct
   {
-    uint8_t data[250];
+    uint8_t data[272];
   };
 } protocolData;
 
