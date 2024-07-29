@@ -337,7 +337,7 @@ typedef union
   {
     uint8_t data[8];
   };
-};
+} acceleration;
 
 /* @attention uint32_t*/
 typedef union
@@ -395,7 +395,7 @@ typedef union
   {
     uint8_t data[8];
   };
-};
+} targetLocation;
 
 /* @attention int32_t*/
 typedef union
@@ -747,3 +747,87 @@ typedef union
   };
 
 } IOmode;
+
+#define ProtocolListInfo \
+  {                      \
+      {0x2000, 5},       \
+      {0x2001, 5},       \
+      {0x2002, 5},       \
+      {0x2010, 5},       \
+      {0x2011, 8},       \
+      {0x6040, 6},       \
+      {0x6041, 6},       \
+      {0x2020, 5},       \
+      {0x2023, 8},       \
+      {0x2024, 8},       \
+      {0x2021, 8},       \
+      {0x2022, 8},       \
+      {0x2030, 8},       \
+      {0x2031, 8},       \
+      {0x2032, 8},       \
+      {0x2040, 8},       \
+      {0x2041, 8},       \
+      {0x2042, 8},       \
+      {0x2043, 8},       \
+      {0x2050, 8},       \
+      {0x2051, 8},       \
+      {0x2052, 8},       \
+      {0x2053, 8},       \
+      {0x2060, 5},       \
+      {0x2061, 8},       \
+      {0x2062, 8},       \
+      {0x2063, 8},       \
+      {0x2070, 8},       \
+      {0x2071, 8},       \
+      {0x2072, 8},       \
+      {0x2073, 8},       \
+      {0x2074, 8},       \
+      {0x2075, 8},       \
+      {0x2076, 8},       \
+  }
+
+typedef union
+{
+  struct
+  {
+    fractionize fractionize_t;
+    staticCurrent staticCurrent_t;
+    dynamicCurrent dynamicCurrent_t;
+    canID canID_t;
+    param param_t;
+    controlBit controlBit_t;
+    statusBit statusBit_t;
+    motorMode motorMode_t;
+    motorUnit motorUnit_t;
+    physicalChange_TimeCoficient physicalChange_TimeCoficient_t;
+    originOffset originOffset_t;
+    errorCode errorCode_t;
+    maxSpeed maxSpeed_t;
+    acceleration acceleration_t;
+    deceleration deceleration_t;
+    targetSpeed targetSpeed_t;
+    targetLocation targetLocation_t;
+    locationChange locationChange_t;
+    targetTime targetTime_t;
+    realSpeed realSpeed_t;
+    realLocation realLocation_t;
+    realTime realTime_t;
+    realVoltage realVoltage_t;
+    closedCtrlEnabled closedCtrlEnabled_t;
+    lossSteps lossSteps_t;
+    lossWarnThreshold lossWarnThreshold_t;
+    lossStopThreshold lossStopThreshold_t;
+    targetSpeedIO targetSpeedIO_t;
+    locationChangeIO locationChangeIO_t;
+    timeChangeIO timeChangeIO_t;
+    accelerationIO accelerationIO_t;
+    decelerationIO decelerationIO_t;
+    maxSpeedIO maxSpeedIO_t;
+    IOmode IOmode_t;
+  };
+
+  struct
+  {
+    uint8_t data[250];
+  };
+};
