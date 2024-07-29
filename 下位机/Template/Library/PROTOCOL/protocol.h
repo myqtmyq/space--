@@ -1,3 +1,5 @@
+#ifndef __PROTOCOL_H
+#define __PROTOCOL_H
 #include "stm32f10x.h"
 
 typedef enum
@@ -831,3 +833,5 @@ typedef union
     uint8_t data[250];
   };
 };
+
+#endif
