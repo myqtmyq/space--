@@ -11,6 +11,6 @@ int main()
 
     while (1)
     {
-        CAN_SendMessage(0x123, data, 8);
+       
     }
 }
