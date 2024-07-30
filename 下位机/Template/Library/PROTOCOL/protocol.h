@@ -18,7 +18,8 @@ typedef union
     uint16_t index;
     uint8_t subIndex;
     uint8_t fractionizeMode;
-    uint32_t reserve : 24;
+    uint16_t reserve1;
+    uint8_t reserve2;
   };
 
   struct
@@ -37,7 +38,8 @@ typedef union
     uint16_t index;
     uint8_t subIndex;
     uint8_t statiCurrentMode;
-    uint32_t reserve : 24;
+    uint16_t reserve1;
+    uint8_t reserve2;
   };
 
   struct
@@ -56,7 +58,8 @@ typedef union
     uint16_t index;
     uint8_t subIndex;
     uint8_t dynamicCurrentMode;
-    uint32_t reserve : 24;
+    uint16_t reserve1;
+    uint8_t reserve2;
   };
 
   struct
@@ -75,7 +78,8 @@ typedef union
     uint16_t index;
     uint8_t subIndex;
     uint8_t canID;
-    uint32_t reserve : 24;
+    uint16_t reserve1;
+    uint8_t reserve2;
   };
 
   struct
@@ -96,7 +100,8 @@ typedef union
     uint16_t index;
     uint8_t subIndex;
     uint8_t baudRate;
-    uint32_t reserve : 24;
+    uint16_t reserve1;
+    uint8_t reserve2;
   };
 
   struct
@@ -147,7 +152,9 @@ typedef union
     uint8_t emergencyStop : 1;
     uint8_t run : 1;
     uint8_t fault : 1;
-    uint16_t reserve : 11;
+    uint8_t reserve1 : 3;
+    uint8_t reserve2;
+    uint16_t reserve3;
   };
 
   struct
