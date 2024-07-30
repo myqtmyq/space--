@@ -17,7 +17,8 @@ int main()
     protocolInit(&protocolData_t);
     while (1)
     {
-
-        Pump_Init(1);
+		
+		CAN_Send_SDO(1,protocolData_t.staticCurrent_t.data);
+        //Pump_Init(1);
     }
 }
