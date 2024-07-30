@@ -3,7 +3,9 @@
 
 #include "stm32f10x.h"
 #include "Can.h"
+#include "Canopen.h"
 #include "UART.h"
+#include "protocol.h"
 
 typedef enum{
     PUMP_STOP = 0,
@@ -12,10 +14,6 @@ typedef enum{
     PUMP_TIME
 }PumpStateTypeDef;
 
-typedef struct{
-    int speed;
-    int 
-
-}PumpTypeDef;
+void Pump_Init(int id);
 
 #endif

@@ -1,6 +1,8 @@
 #include "Canopen.h"
 
-void CAN_Send_SDO(int id,CtrlWorddef length,uint16_t index,uint8_t subindex,uint32_t data){
+void CAN_Send_SDO(int id,uint8_t *data){
+    int cobid=0x600+id;
+    CAN_SendMessage(cobid,data,8);
 
 }
 
