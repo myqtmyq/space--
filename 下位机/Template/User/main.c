@@ -1,5 +1,5 @@
 #define __HANDLE_GLOBALS
-
+#pragma pack(1)
 #include "stm32f10x.h"
 #include "stm32f10x_it.h"
 #include "Systick.h"
@@ -17,8 +17,8 @@ int main()
     protocolInit(&protocolData_t);
     while (1)
     {
-		
-		CAN_Send_SDO(1,protocolData_t.staticCurrent_t.data);
-        //Pump_Init(1);
+
+        CAN_Send_SDO(1, protocolData_t.staticCurrent_t.data);
+        // Pump_Init(1);
     }
 }
