@@ -20,5 +20,5 @@ void Pump_Speed(int id, uint8_t speed){
 void Pump_Init(int id)
 {
     Pump_Enable(id);
-    Pump_Mode(id,PUMP_STOP);
+    //Pump_Mode(id,PUMP_STOP);
 }
