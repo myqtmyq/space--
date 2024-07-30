@@ -34,7 +34,7 @@ void BSP_CAN_Init(void)
     CAN_InitStructure.CAN_NART = ENABLE;
     CAN_InitStructure.CAN_RFLM = DISABLE;
     CAN_InitStructure.CAN_TXFP = ENABLE;
-    CAN_InitStructure.CAN_Mode = CAN_Mode_Normal;
+    CAN_InitStructure.CAN_Mode = CAN_Mode_LoopBack;
 
     // ???¨°?????
     CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
