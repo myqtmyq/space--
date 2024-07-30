@@ -13,7 +13,7 @@ void protocolInit(protocolData *protocolData_t)
       ProtocolInfo_t[i].offset = sum;
       protocolData_t->data[sum] = 0x40;
       protocolData_t->data[sum + 1] = ProtocolInfo_t[i].index & 0xff;
-      protocolData_t->data[sum + 2] = (ProtocolInfo_t[i].index >> 4) & 0xff;
+      protocolData_t->data[sum + 2] = (ProtocolInfo_t[i].index >> 8) & 0xff;
       protocolData_t->data[sum + 3] = 0x00;
       for (int j = 0; j < 4; j++)
       {
