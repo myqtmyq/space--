@@ -31,6 +31,7 @@
 #include "stm32f10x.h"
 #include "Canopen.h"
 #include "Can.h"
+#include "UART.h"
 	 
 
 /* Exported types ------------------------------------------------------------*/

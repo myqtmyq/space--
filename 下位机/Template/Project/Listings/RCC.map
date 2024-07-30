@@ -31,7 +31,13 @@ Section Cross References
     system_stm32f10x.o(i.SystemCoreClockUpdate) refers to system_stm32f10x.o(.data) for .data
     system_stm32f10x.o(i.SystemInit) refers to system_stm32f10x.o(i.SetSysClock) for SetSysClock
     main.o(i.main) refers to systick.o(i.SystemCLK_Config) for SystemCLK_Config
+    main.o(i.main) refers to uart.o(i.BSP_UART1_CFG) for BSP_UART1_CFG
     main.o(i.main) refers to can.o(i.BSP_CAN_Init) for BSP_CAN_Init
+<<<<<<< HEAD
+=======
+    main.o(i.main) refers to driver_protocol.o(i.protocolInit) for protocolInit
+    main.o(i.main) refers to pump.o(i.Pump_Init) for Pump_Init
+>>>>>>> 28811e91cba295c30de081d9d042a13513ee4e4d
     stm32f10x_it.o(i.EXTI0_IRQHandler) refers to stm32f10x_exti.o(i.EXTI_GetITStatus) for EXTI_GetITStatus
     stm32f10x_it.o(i.EXTI0_IRQHandler) refers to stm32f10x_exti.o(i.EXTI_ClearITPendingBit) for EXTI_ClearITPendingBit
     stm32f10x_it.o(i.EXTI15_10_IRQHandler) refers to stm32f10x_exti.o(i.EXTI_GetITStatus) for EXTI_GetITStatus
@@ -117,6 +123,7 @@ Section Cross References
     can.o(i.BSP_CAN_Init) refers to stm32f10x_can.o(i.CAN_Init) for CAN_Init
     can.o(i.BSP_CAN_Init) refers to stm32f10x_can.o(i.CAN_FilterInit) for CAN_FilterInit
     can.o(i.CAN_SendMessage) refers to stm32f10x_can.o(i.CAN_Transmit) for CAN_Transmit
+    canopen.o(i.CAN_Send_SDO) refers to can.o(i.CAN_SendMessage) for CAN_SendMessage
     systick.o(i.SystemCLK_Config) refers to stm32f10x_rcc.o(i.RCC_HSEConfig) for RCC_HSEConfig
     systick.o(i.SystemCLK_Config) refers to stm32f10x_rcc.o(i.RCC_WaitForHSEStartUp) for RCC_WaitForHSEStartUp
     systick.o(i.SystemCLK_Config) refers to stm32f10x_rcc.o(i.RCC_HCLKConfig) for RCC_HCLKConfig
@@ -127,6 +134,21 @@ Section Cross References
     systick.o(i.SystemCLK_Config) refers to stm32f10x_rcc.o(i.RCC_GetFlagStatus) for RCC_GetFlagStatus
     systick.o(i.SystemCLK_Config) refers to stm32f10x_rcc.o(i.RCC_SYSCLKConfig) for RCC_SYSCLKConfig
     systick.o(i.SystemCLK_Config) refers to stm32f10x_rcc.o(i.RCC_GetSYSCLKSource) for RCC_GetSYSCLKSource
+    uart.o(i.BSP_UART1_CFG) refers to stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
+    uart.o(i.BSP_UART1_CFG) refers to stm32f10x_gpio.o(i.GPIO_Init) for GPIO_Init
+    uart.o(i.BSP_UART1_CFG) refers to stm32f10x_usart.o(i.USART_Init) for USART_Init
+    uart.o(i.BSP_UART1_CFG) refers to stm32f10x_usart.o(i.USART_Cmd) for USART_Cmd
+    uart.o(i.BSP_UART1_CFG) refers to misc.o(i.NVIC_Init) for NVIC_Init
+    uart.o(i.BSP_UART1_CFG) refers to stm32f10x_usart.o(i.USART_ITConfig) for USART_ITConfig
+    uart.o(i.fputc) refers to stm32f10x_usart.o(i.USART_SendData) for USART_SendData
+    uart.o(i.fputc) refers to stm32f10x_usart.o(i.USART_GetFlagStatus) for USART_GetFlagStatus
+    driver_protocol.o(i.getOffset) refers to driver_protocol.o(.data) for .data
+    driver_protocol.o(i.protocolInit) refers to driver_protocol.o(.data) for .data
+    pump.o(i.Pump_Enable) refers to canopen.o(i.CAN_Send_SDO) for CAN_Send_SDO
+    pump.o(i.Pump_Init) refers to pump.o(i.Pump_Enable) for Pump_Enable
+    pump.o(i.Pump_Init) refers to pump.o(i.Pump_Mode) for Pump_Mode
+    pump.o(i.Pump_Mode) refers to canopen.o(i.CAN_Send_SDO) for CAN_Send_SDO
+    pump.o(i.Pump_Speed) refers to canopen.o(i.CAN_Send_SDO) for CAN_Send_SDO
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000F) for __rt_final_cpp
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$00000011) for __rt_final_exit
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry12b.o(.ARM.Collect$$$$0000000E) for __rt_lib_shutdown_fini
@@ -153,7 +175,6 @@ Removing Unused input sections from the image.
     Removing core_cm3.o(.emb_text), (32 bytes).
     Removing system_stm32f10x.o(i.SystemCoreClockUpdate), (124 bytes).
     Removing system_stm32f10x.o(.data), (20 bytes).
-    Removing misc.o(i.NVIC_Init), (100 bytes).
     Removing misc.o(i.NVIC_PriorityGroupConfig), (20 bytes).
     Removing misc.o(i.NVIC_SetVectorTable), (20 bytes).
     Removing misc.o(i.NVIC_SystemLPConfig), (28 bytes).
@@ -396,7 +417,6 @@ Removing Unused input sections from the image.
     Removing stm32f10x_rcc.o(i.RCC_ClearITPendingBit), (12 bytes).
     Removing stm32f10x_rcc.o(i.RCC_ClockSecuritySystemCmd), (12 bytes).
     Removing stm32f10x_rcc.o(i.RCC_DeInit), (64 bytes).
-    Removing stm32f10x_rcc.o(i.RCC_GetClocksFreq), (172 bytes).
     Removing stm32f10x_rcc.o(i.RCC_GetITStatus), (20 bytes).
     Removing stm32f10x_rcc.o(i.RCC_HSICmd), (12 bytes).
     Removing stm32f10x_rcc.o(i.RCC_ITConfig), (28 bytes).
@@ -406,7 +426,6 @@ Removing Unused input sections from the image.
     Removing stm32f10x_rcc.o(i.RCC_RTCCLKCmd), (12 bytes).
     Removing stm32f10x_rcc.o(i.RCC_RTCCLKConfig), (16 bytes).
     Removing stm32f10x_rcc.o(i.RCC_USBCLKConfig), (12 bytes).
-    Removing stm32f10x_rcc.o(.data), (20 bytes).
     Removing stm32f10x_rtc.o(i.RTC_ClearFlag), (16 bytes).
     Removing stm32f10x_rtc.o(i.RTC_ClearITPendingBit), (16 bytes).
     Removing stm32f10x_rtc.o(i.RTC_EnterConfigMode), (16 bytes).
@@ -569,14 +588,11 @@ Removing Unused input sections from the image.
     Removing stm32f10x_usart.o(i.USART_ClearITPendingBit), (16 bytes).
     Removing stm32f10x_usart.o(i.USART_ClockInit), (30 bytes).
     Removing stm32f10x_usart.o(i.USART_ClockStructInit), (12 bytes).
-    Removing stm32f10x_usart.o(i.USART_Cmd), (24 bytes).
     Removing stm32f10x_usart.o(i.USART_DMACmd), (20 bytes).
     Removing stm32f10x_usart.o(i.USART_DeInit), (164 bytes).
     Removing stm32f10x_usart.o(i.USART_GetFlagStatus), (14 bytes).
     Removing stm32f10x_usart.o(i.USART_GetITStatus), (64 bytes).
     Removing stm32f10x_usart.o(i.USART_HalfDuplexCmd), (24 bytes).
-    Removing stm32f10x_usart.o(i.USART_ITConfig), (54 bytes).
-    Removing stm32f10x_usart.o(i.USART_Init), (188 bytes).
     Removing stm32f10x_usart.o(i.USART_IrDACmd), (24 bytes).
     Removing stm32f10x_usart.o(i.USART_IrDAConfig), (16 bytes).
     Removing stm32f10x_usart.o(i.USART_LINBreakDetectLengthConfig), (16 bytes).
@@ -602,6 +618,7 @@ Removing Unused input sections from the image.
     Removing stm32f10x_wwdg.o(i.WWDG_SetCounter), (16 bytes).
     Removing stm32f10x_wwdg.o(i.WWDG_SetPrescaler), (20 bytes).
     Removing stm32f10x_wwdg.o(i.WWDG_SetWindowValue), (32 bytes).
+<<<<<<< HEAD
     Removing can.o(i.CAN_SendMessage), (60 bytes).
     Removing can.o(i.Can_Receive_SDO), (2 bytes).
 
@@ -1013,4 +1030,12 @@ Image component sizes
     Total ROM Size (Code + RO Data + RW Data)       3008 (   2.94kB)
 
 ==============================================================================
+=======
+    Removing canopen.o(i.CAN_Send_NMT), (2 bytes).
+    Removing canopen.o(i.CAN_Send_PDO), (2 bytes).
+    Removing uart.o(i.fputc), (36 bytes).
+    Removing driver_protocol.o(i.getOffset), (40 bytes).
+    Removing pump.o(i.Pump_Speed), (20 bytes).
+>>>>>>> 28811e91cba295c30de081d9d042a13513ee4e4d
 
+451 unused section(s) (total 14634 bytes) removed from the image.

@@ -327,7 +327,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
-            <uGnu>0</uGnu>
+            <uGnu>1</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_LD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\User;..\Library\STM32F10x_StdPeriph_Driver\inc;..\Library\CMSIS\CM3;..\..\MyLibrary\inc;..\Driver\inc</IncludePath>
+              <IncludePath>..\User;..\Library\STM32F10x_StdPeriph_Driver\inc;..\Library\CMSIS\CM3;..\..\MyLibrary\inc;..\Driver\inc;..\Library\PROTOCOL;..\Library</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -421,6 +421,16 @@
               <FileName>stm32f10x_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\stm32f10x_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>Handle.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Library\Handle.h</FilePath>
+            </File>
+            <File>
+              <FileName>protocol.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Library\PROTOCOL\protocol.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -561,6 +571,21 @@
               <FileName>Systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Driver\src\Systick.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\src\UART.c</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\src\Driver_protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>PUMP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\src\PUMP.c</FilePath>
             </File>
           </Files>
         </Group>
