@@ -5,6 +5,6 @@
 #include "core_cm3.h"
 
 void SystemCLK_Config();
-
+void delay(uint16_t ms);
 
 #endif

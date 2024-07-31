@@ -19,7 +19,7 @@ void BSP_CAN_Init(void)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    // ??¦ËCAN????
+    // ??ï¿½ï¿½CAN????
     CAN_DeInit(CAN1);
 
     CAN_InitTypeDef CAN_InitStructure;
@@ -36,7 +36,7 @@ void BSP_CAN_Init(void)
     CAN_InitStructure.CAN_TXFP = ENABLE;
     CAN_InitStructure.CAN_Mode = CAN_Mode_LoopBack;
 
-    // ???¨°?????
+    // ???ï¿½ï¿½?????
     CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
     CAN_InitStructure.CAN_BS1 = CAN_BS1_3tq;
     CAN_InitStructure.CAN_BS2 = CAN_BS2_2tq;
@@ -82,4 +82,3 @@ uint8_t CAN_SendMessage(uint32_t id, uint8_t *data, uint8_t length)
 
     return 1; // ??????
 }
-

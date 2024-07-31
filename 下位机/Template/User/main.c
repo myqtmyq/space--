@@ -14,9 +14,9 @@ int main()
     BSP_UART1_CFG(9600, 0);
     BSP_CAN_Init();
     protocolInit(&protocolData_t);
+    Pump_Init(0x01);
+    Pump_Start(0x01);
     while (1)
     {
-
-                Pump_Init(1);
     }
 }

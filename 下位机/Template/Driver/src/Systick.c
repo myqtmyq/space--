@@ -23,11 +23,22 @@ void SystemCLK_Config()
 
         while (RCC_GetSYSCLKSource() != 0x08)
             ;
+
+        SysTick_Config((SystemCoreClock / 1000));
     }
     else
     {
         // HSE启动失败，处理错误
         while (1)
             ;
+    }
+}
+
+void delay(uint16_t ms)
+{
+    uint32_t startTick = g_TickCount;
+    while ((g_TickCount - startTick) < ms)
+    {
+        /* code */
     }
 }
