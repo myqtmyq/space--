@@ -1,5 +1,7 @@
 #include "Can.h"
 
+volatile int Mailbox_Nbr=0;
+
 void BSP_CAN_Init(void)
 {
     // ???CAN???
@@ -34,7 +36,7 @@ void BSP_CAN_Init(void)
     CAN_InitStructure.CAN_NART = ENABLE;
     CAN_InitStructure.CAN_RFLM = DISABLE;
     CAN_InitStructure.CAN_TXFP = ENABLE;
-    CAN_InitStructure.CAN_Mode = CAN_Mode_LoopBack;
+    CAN_InitStructure.CAN_Mode = CAN_Mode_Normal;
 
     // ???��?????
     CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
@@ -54,9 +56,21 @@ void BSP_CAN_Init(void)
     CAN_FilterInitStructure.CAN_FilterFIFOAssignment = CAN_FilterFIFO0;
     CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
     CAN_FilterInit(&CAN_FilterInitStructure);
+	/*
+	// 配置 CAN 中断
+    NVIC_InitTypeDef NVIC_InitStructure;
+	
+    NVIC_InitStructure.NVIC_IRQChannel = USB_HP_CAN1_TX_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+
+    CAN_ITConfig(CAN1, CAN_IT_TME, ENABLE);  // 发送邮箱空中断
+	*/
 }
 
-// CAN???????
+// CAN??????
 uint8_t CAN_SendMessage(uint32_t id, uint8_t *data, uint8_t length)
 {
     CanTxMsg TxMessage;
@@ -70,10 +84,17 @@ uint8_t CAN_SendMessage(uint32_t id, uint8_t *data, uint8_t length)
         TxMessage.Data[i] = data[i];
     }
 
+	//while(Mailbox_Nbr==3);
     uint8_t mailbox = CAN_Transmit(CAN1, &TxMessage);
+	/*
+	 if (mailbox != CAN_TxStatus_NoMailBox)
+    {
+        Mailbox_Nbr++;
+    }
+	*/
     uint32_t timeout = 0xFFFF;
 
-    // while((CAN_TransmitStatus(CAN1, mailbox) != CAN_TxStatus_Ok) && (timeout--));
+    //while((CAN_TransmitStatus(CAN1, mailbox) != CAN_TxStatus_Ok) && (timeout--));
 
     if (timeout == 0)
     {
@@ -82,3 +103,14 @@ uint8_t CAN_SendMessage(uint32_t id, uint8_t *data, uint8_t length)
 
     return 1; // ??????
 }
+/*
+void USB_HP_CAN1_TX_IRQnHandler(void){
+	if (CAN_GetITStatus(CAN1, CAN_IT_TME) != RESET)
+    {
+		Mailbox_Nbr--;
+		
+        CAN_ClearITPendingBit(CAN1, CAN_IT_TME);
+    }
+	
+}
+*/

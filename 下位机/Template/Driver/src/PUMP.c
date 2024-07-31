@@ -30,7 +30,7 @@ void Pump_Speed(int id, int32_t speed, uint32_t acceleration)
     protocolData_t.targetSpeed_t.targetSpeed = speed;
     protocolData_t.targetSpeed_t.operation = Write4b;
     CAN_Send_SDO(id, protocolData_t.targetSpeed_t.data);
-    delay(50);
+    //delay(50);
     protocolData_t.acceleration_t.acceleration = acceleration;
     protocolData_t.acceleration_t.operation = Write4b;
     CAN_Send_SDO(id, protocolData_t.acceleration_t.data);
@@ -52,10 +52,10 @@ void Pump_Stop(int id)
 void Pump_Init(int id)
 {
     Pump_Enable(id);
-    delay(50);
+    //delay(50);
     Pump_Mode(id, PUMP_SPEED);
-    delay(50);
+    //delay(50);
     Pump_ModeUnit(id);
-    delay(50);
+    //delay(5);
     Pump_Speed(id, 60, 400);
 }
