@@ -1,7 +1,7 @@
 #ifndef __PROTOCOL_H
 #define __PROTOCOL_H
 #include "stm32f10x.h"
-
+#pragma pack(1)
 #define Write1b 0x2f
 #define Write2b 0x2b
 #define Write3b 0x27
@@ -18,8 +18,6 @@ typedef union
     uint16_t index;
     uint8_t subIndex;
     uint8_t fractionizeMode;
-    uint8_t reserve1;
-    uint16_t reserve2;
   };
 
   struct
@@ -38,8 +36,6 @@ typedef union
     uint16_t index;
     uint8_t subIndex;
     uint8_t statiCurrentMode;
-    uint8_t reserve1;
-    uint16_t reserve2;
   };
 
   struct
@@ -58,8 +54,6 @@ typedef union
     uint16_t index;
     uint8_t subIndex;
     uint8_t dynamicCurrentMode;
-    uint8_t reserve1;
-    uint16_t reserve2;
   };
 
   struct
@@ -78,8 +72,6 @@ typedef union
     uint16_t index;
     uint8_t subIndex;
     uint8_t canID;
-    uint8_t reserve1;
-    uint16_t reserve2;
   };
 
   struct
@@ -100,8 +92,6 @@ typedef union
     uint16_t index;
     uint8_t subIndex;
     uint8_t baudRate;
-    uint8_t reserve1;
-    uint16_t reserve2;
   };
 
   struct
@@ -129,7 +119,6 @@ typedef union
     uint8_t setOrigin : 1;
     uint8_t setZero : 1;
     uint8_t dataManagement : 1;
-    uint8_t reserve : 8;
   };
 
   struct
@@ -152,9 +141,6 @@ typedef union
     uint8_t emergencyStop : 1;
     uint8_t run : 1;
     uint8_t fault : 1;
-    uint8_t reserve1 : 3;
-    uint8_t reserve2;
-    uint16_t reserve3;
   };
 
   struct
@@ -205,7 +191,6 @@ typedef union
     uint8_t speedUnit;
     uint8_t locationUnit;
     uint8_t timeUnit;
-    uint8_t reserve;
   };
 
   struct
