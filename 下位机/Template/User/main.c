@@ -1,5 +1,4 @@
 #define __HANDLE_GLOBALS
-#pragma pack(1)
 #include "stm32f10x.h"
 #include "stm32f10x_it.h"
 #include "Systick.h"
@@ -15,10 +14,9 @@ int main()
     BSP_UART1_CFG(9600, 0);
     BSP_CAN_Init();
     protocolInit(&protocolData_t);
+    Pump_Init(0x01);
+    Pump_Start(0x01);
     while (1)
     {
-
-        CAN_Send_SDO(1, protocolData_t.staticCurrent_t.data);
-        // Pump_Init(1);
     }
 }

@@ -43,7 +43,8 @@
  * @param  None
  * @retval None
  */
-void NMI_Handler(void) {
+void NMI_Handler(void)
+{
 }
 
 /**
@@ -51,9 +52,11 @@ void NMI_Handler(void) {
  * @param  None
  * @retval None
  */
-void HardFault_Handler(void) {
+void HardFault_Handler(void)
+{
     /* Go to infinite loop when Hard Fault exception occurs */
-    while (1) {
+    while (1)
+    {
     }
 }
 
@@ -62,9 +65,11 @@ void HardFault_Handler(void) {
  * @param  None
  * @retval None
  */
-void MemManage_Handler(void) {
+void MemManage_Handler(void)
+{
     /* Go to infinite loop when Memory Manage exception occurs */
-    while (1) {
+    while (1)
+    {
     }
 }
 
@@ -73,9 +78,11 @@ void MemManage_Handler(void) {
  * @param  None
  * @retval None
  */
-void BusFault_Handler(void) {
+void BusFault_Handler(void)
+{
     /* Go to infinite loop when Bus Fault exception occurs */
-    while (1) {
+    while (1)
+    {
     }
 }
 
@@ -84,9 +91,11 @@ void BusFault_Handler(void) {
  * @param  None
  * @retval None
  */
-void UsageFault_Handler(void) {
+void UsageFault_Handler(void)
+{
     /* Go to infinite loop when Usage Fault exception occurs */
-    while (1) {
+    while (1)
+    {
     }
 }
 
@@ -95,7 +104,8 @@ void UsageFault_Handler(void) {
  * @param  None
  * @retval None
  */
-void SVC_Handler(void) {
+void SVC_Handler(void)
+{
 }
 
 /**
@@ -103,7 +113,8 @@ void SVC_Handler(void) {
  * @param  None
  * @retval None
  */
-void DebugMon_Handler(void) {
+void DebugMon_Handler(void)
+{
 }
 
 /**
@@ -111,7 +122,8 @@ void DebugMon_Handler(void) {
  * @param  None
  * @retval None
  */
-void PendSV_Handler(void) {
+void PendSV_Handler(void)
+{
 }
 
 /**
@@ -119,14 +131,10 @@ void PendSV_Handler(void) {
  * @param  None
  * @retval None
  */
-int  t;
-void SysTick_Handler(void) {
-
-    if (t >= 10) { // ms
-        t = 1;
-        // printf("A");
-    }
-    t++;
+volatile uint32_t g_TickCount = 0;
+void SysTick_Handler(void)
+{
+    g_TickCount++;
 }
 
 /******************************************************************************/
@@ -136,86 +144,109 @@ void SysTick_Handler(void) {
 /*  file (startup_stm32f10x_xx.s).                                            */
 /******************************************************************************/
 
-void EXTI0_IRQHandler(void) {
-    if (EXTI_GetITStatus(EXTI_Line0) != RESET) {
+void EXTI0_IRQHandler(void)
+{
+    if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line0);
     }
 }
 
-void EXTI1_IRQHandler(void) {
-    if (EXTI_GetITStatus(EXTI_Line0) != RESET) {
+void EXTI1_IRQHandler(void)
+{
+    if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line0);
     }
 }
 
-void EXTI2_IRQHandler(void) {
-    if (EXTI_GetITStatus(EXTI_Line2) != RESET) {
+void EXTI2_IRQHandler(void)
+{
+    if (EXTI_GetITStatus(EXTI_Line2) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line2);
     }
 }
 
-void EXTI3_IRQHandler(void) {
-    if (EXTI_GetITStatus(EXTI_Line3) != RESET) {
+void EXTI3_IRQHandler(void)
+{
+    if (EXTI_GetITStatus(EXTI_Line3) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line3);
     }
 }
 
-void EXTI4_IRQHandler(void) {
-    if (EXTI_GetITStatus(EXTI_Line4) != RESET) {
+void EXTI4_IRQHandler(void)
+{
+    if (EXTI_GetITStatus(EXTI_Line4) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line4);
     }
 }
 
-void EXTI9_5_IRQHandler(void) {
-    if (EXTI_GetITStatus(EXTI_Line5) != RESET) {
+void EXTI9_5_IRQHandler(void)
+{
+    if (EXTI_GetITStatus(EXTI_Line5) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line5);
     }
-    if (EXTI_GetITStatus(EXTI_Line6) != RESET) {
+    if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line6);
     }
-    if (EXTI_GetITStatus(EXTI_Line7) != RESET) {
+    if (EXTI_GetITStatus(EXTI_Line7) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line7);
     }
-    if (EXTI_GetITStatus(EXTI_Line8) != RESET) {
+    if (EXTI_GetITStatus(EXTI_Line8) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line8);
     }
-    if (EXTI_GetITStatus(EXTI_Line9) != RESET) {
+    if (EXTI_GetITStatus(EXTI_Line9) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line9);
     }
 }
 
-void EXTI15_10_IRQHandler(void) {
-    if (EXTI_GetITStatus(EXTI_Line10) != RESET) {
+void EXTI15_10_IRQHandler(void)
+{
+    if (EXTI_GetITStatus(EXTI_Line10) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line10);
     }
-    if (EXTI_GetITStatus(EXTI_Line11) != RESET) {
+    if (EXTI_GetITStatus(EXTI_Line11) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line11);
     }
-    if (EXTI_GetITStatus(EXTI_Line12) != RESET) {
+    if (EXTI_GetITStatus(EXTI_Line12) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line12);
     }
-    if (EXTI_GetITStatus(EXTI_Line13) != RESET) {
+    if (EXTI_GetITStatus(EXTI_Line13) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line13);
     }
-    if (EXTI_GetITStatus(EXTI_Line14) != RESET) {
+    if (EXTI_GetITStatus(EXTI_Line14) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line14);
     }
-    if (EXTI_GetITStatus(EXTI_Line15) != RESET) {
+    if (EXTI_GetITStatus(EXTI_Line15) != RESET)
+    {
 
         EXTI_ClearITPendingBit(EXTI_Line15);
     }
@@ -227,9 +258,10 @@ void EXTI15_10_IRQHandler(void) {
  * @retval None
  */
 /* USART1???? */
-void USART1_IRQHandler(void) {
-//    if (USART_GetITStatus(USART1, UART1_ITFLAG) != RESET) {
-  //  }
+void USART1_IRQHandler(void)
+{
+    //    if (USART_GetITStatus(USART1, UART1_ITFLAG) != RESET) {
+    //  }
 }
 
 /**
@@ -238,8 +270,9 @@ void USART1_IRQHandler(void) {
  * @retval None
  */
 /* USART2???? */
-void USART2_IRQHandler(void) {
-	/*
+void USART2_IRQHandler(void)
+{
+    /*
     if (USART_GetITStatus(USART2, UART2_ITFLAG) != RESET) {
 
         while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
@@ -248,7 +281,7 @@ void USART2_IRQHandler(void) {
         // USART_SendData(USART1,'B');
         USART_ClearITPendingBit(USART2, UART2_ITFLAG);
     }
-	*/
+    */
 }
 
 /**
@@ -262,7 +295,6 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
     {
         // ? FIFO0 ????
         CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);
-
 
         // ???????
         CAN_ClearITPendingBit(CAN1, CAN_IT_FMP0);
