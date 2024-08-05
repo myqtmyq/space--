@@ -5,4 +5,5 @@
 #include "BSP_DMA.h"
 
 void usart1Init();
+void usart1Send(uint8_t *data, uint8_t id, uint8_t operation);
 #endif
