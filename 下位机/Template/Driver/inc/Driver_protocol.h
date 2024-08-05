@@ -12,4 +12,6 @@ typedef struct
 
 void protocolInit(protocolData *protocolData_t);
 uint8_t getOffset(uint16_t index);
+uint8_t *protocolPack(uint8_t *data, uint8_t id, uint8_t operation);
+uint8_t getlength(uint8_t operation);
 #endif

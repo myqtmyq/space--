@@ -2,11 +2,6 @@
 #define __PROTOCOL_H
 #include "stm32f10x.h"
 #pragma pack(1)
-#define Write1b 0x2f
-#define Write2b 0x2b
-#define Write3b 0x27
-#define Write4b 0x23
-#define Read 0x40
 
 /* @attention uint8_t
     value: 0- 8; 0 = 256 fractionize, 1-7 = 128 - 2 , 8 = 1*/
@@ -14,15 +9,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint8_t fractionizeMode;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[4];
   };
 } fractionize;
 
@@ -32,15 +25,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint8_t statiCurrentMode;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[4];
   };
 } staticCurrent;
 
@@ -50,15 +41,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint8_t dynamicCurrentMode;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[4];
   };
 } dynamicCurrent;
 
@@ -68,35 +57,36 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
-    uint8_t canID;
+    uint8_t nodeID;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[4];
   };
 
-} canID;
+} nodeID;
 
 /* @attention uint32_t
-    value: baudrate: bit 0-7 -> 10 = 1M, 5/0 = 500k, 2 = 250k default is 0
+    value: baudrate: 0 - 115200 1 - 19200 2 - 9600
+           stopbit: 0 - 1bit  1 - 2bit
+           checkbit: 0 - none 1 - even 2 - odd
+           default is 0
     bit 8-31 is 0*/
 typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint8_t baudRate;
+    uint8_t stopBit;
+    uint8_t checkBit;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } param;
@@ -108,9 +98,7 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint8_t start : 1;
     uint8_t enable : 1;
     uint8_t emergencyStop : 1;
@@ -123,7 +111,7 @@ typedef union
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[4];
   };
 
 } controlBit;
@@ -133,9 +121,7 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint8_t start : 1;
     uint8_t enable : 1;
     uint8_t emergencyStop : 1;
@@ -145,7 +131,7 @@ typedef union
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[4];
   };
 } statusBit;
 
@@ -163,15 +149,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint8_t motorMode;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[4];
   };
 
 } motorMode;
@@ -185,9 +169,7 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint8_t speedUnit;
     uint8_t locationUnit;
     uint8_t timeUnit;
@@ -195,7 +177,7 @@ typedef union
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } motorUnit;
@@ -208,15 +190,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t cofficient;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } physicalChange_TimeCoficient;
@@ -226,15 +206,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     int32_t offset;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } originOffset;
@@ -251,15 +229,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t errorCode;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } errorCode;
@@ -270,15 +246,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t maxSpeed;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } maxSpeed;
@@ -289,15 +263,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t acceleration;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 } acceleration;
 
@@ -306,15 +278,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t deceleration;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 } deceleration;
 
@@ -323,15 +293,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     int32_t targetSpeed;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } targetSpeed;
@@ -341,15 +309,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     int32_t targetLocation;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 } targetLocation;
 
@@ -358,15 +324,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     int32_t locationChange;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } locationChange;
@@ -376,15 +340,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t targetTime;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } targetTime;
@@ -394,15 +356,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     int32_t realSpeed;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } realSpeed;
@@ -412,15 +372,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     int32_t realLocation;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } realLocation;
@@ -430,15 +388,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t realTime;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } realTime;
@@ -448,15 +404,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t realVoltage;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } realVoltage;
@@ -466,15 +420,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint8_t closedCtrlEnabled;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[4];
   };
 
 } closedCtrlEnabled;
@@ -484,15 +436,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t lossSteps;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } lossSteps;
@@ -502,15 +452,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t lossWarnThreshold;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } lossWarnThreshold;
@@ -520,15 +468,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t lossStopThreshold;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } lossStopThreshold;
@@ -538,15 +484,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     int32_t targetSpeedIO;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } targetSpeedIO;
@@ -556,15 +500,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     int32_t locationChangeIO;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } locationChangeIO;
@@ -574,15 +516,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t timeChangeIO;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } timeChangeIO;
@@ -592,15 +532,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t accelerationIO;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } accelerationIO;
@@ -610,15 +548,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t decelerationIO;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } decelerationIO;
@@ -628,15 +564,13 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint32_t maxSpeedIO;
   };
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } maxSpeedIO;
@@ -654,9 +588,7 @@ typedef union
 {
   struct
   {
-    uint8_t operation;
     uint16_t index;
-    uint8_t subIndex;
     uint8_t emergencyStop;
     uint8_t direction;
     uint8_t triggerORpwm;
@@ -665,47 +597,47 @@ typedef union
 
   struct
   {
-    uint8_t data[8];
+    uint8_t data[6];
   };
 
 } IOmode;
 
 #define ProtocolListInfo \
   {                      \
-      {0x2000, 8},       \
-      {0x2001, 8},       \
-      {0x2002, 8},       \
-      {0x2010, 8},       \
-      {0x2011, 8},       \
-      {0x6040, 8},       \
-      {0x6041, 8},       \
-      {0x2020, 8},       \
-      {0x2023, 8},       \
-      {0x2024, 8},       \
-      {0x2021, 8},       \
-      {0x2022, 8},       \
-      {0x2030, 8},       \
-      {0x2031, 8},       \
-      {0x2032, 8},       \
-      {0x2040, 8},       \
-      {0x2041, 8},       \
-      {0x2042, 8},       \
-      {0x2043, 8},       \
-      {0x2050, 8},       \
-      {0x2051, 8},       \
-      {0x2052, 8},       \
-      {0x2053, 8},       \
-      {0x2060, 8},       \
-      {0x2061, 8},       \
-      {0x2062, 8},       \
-      {0x2063, 8},       \
-      {0x2070, 8},       \
-      {0x2071, 8},       \
-      {0x2072, 8},       \
-      {0x2073, 8},       \
-      {0x2074, 8},       \
-      {0x2075, 8},       \
-      {0x2076, 8},       \
+      {0x2000, 4},       \
+      {0x2001, 4},       \
+      {0x2002, 4},       \
+      {0x2003, 4},       \
+      {0x2004, 6},       \
+      {0x2006, 4},       \
+      {0x1000, 4},       \
+      {0x2007, 4},       \
+      {0x2008, 6},       \
+      {0x200A, 6},       \
+      {0x200C, 6},       \
+      {0x1001, 6},       \
+      {0x2010, 6},       \
+      {0x2012, 6},       \
+      {0x2014, 6},       \
+      {0x2016, 6},       \
+      {0x2018, 6},       \
+      {0x201A, 6},       \
+      {0x201C, 6},       \
+      {0x1003, 6},       \
+      {0x1005, 6},       \
+      {0x1007, 6},       \
+      {0x1009, 6},       \
+      {0x2020, 4},       \
+      {0x2021, 6},       \
+      {0x2023, 6},       \
+      {0x2025, 6},       \
+      {0x2030, 6},       \
+      {0x2032, 6},       \
+      {0x2034, 6},       \
+      {0x2036, 6},       \
+      {0x2038, 6},       \
+      {0x203A, 6},       \
+      {0x203C, 6},       \
   }
 
 typedef union
@@ -715,7 +647,7 @@ typedef union
     fractionize fractionize_t;
     staticCurrent staticCurrent_t;
     dynamicCurrent dynamicCurrent_t;
-    canID canID_t;
+    nodeID nodeID_t;
     param param_t;
     controlBit controlBit_t;
     statusBit statusBit_t;
@@ -750,7 +682,7 @@ typedef union
 
   struct
   {
-    uint8_t data[272];
+    uint8_t data[188];
   };
 } protocolData;
 
