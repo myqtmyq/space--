@@ -40,4 +40,8 @@ void usart1Send(uint8_t *data, uint8_t id, uint8_t operation)
   uart1DMA_ENABLE(
       buffer,
       length);
+  while (!DMA_GetFlagStatus(DMA1_FLAG_TC4))
+  {
+    /* code */
+  }
 }

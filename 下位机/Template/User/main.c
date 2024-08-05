@@ -13,16 +13,11 @@ int main()
     SystemCLK_Config();
     usart1Init();
     protocolInit(&protocolData_t);
-    // Pump_Init(0x01);
 
     while (1)
     {
+        // Pump_Init(0x01);
         Pump_Start(0x01);
         delay(50);
-    }
-
-    while (1)
-    {
-        /* code */
     }
 }
