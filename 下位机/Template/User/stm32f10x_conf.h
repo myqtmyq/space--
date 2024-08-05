@@ -49,7 +49,8 @@
 #include "stm32f10x_wwdg.h"
 #include "misc.h"
 #include "stm32f10x_it.h"
-#include "BSP_USART.h" /*High level functions for NVIC and SysTick (add-on to CMSIS functions) */
+#include "BSP_USART.h"
+#include "stdlib.h" /*High level functions for NVIC and SysTick (add-on to CMSIS functions) */
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

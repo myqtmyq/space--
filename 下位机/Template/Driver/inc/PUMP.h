@@ -7,6 +7,7 @@
 #include "UART.h"
 #include "protocol.h"
 #include "Systick.h"
+#include "BSP_USART.h"
 
 typedef enum
 {

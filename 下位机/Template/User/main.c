@@ -11,12 +11,13 @@
 int main()
 {
     SystemCLK_Config();
-    BSP_UART1_CFG(9600, 0);
-    BSP_CAN_Init();
+    usart1Init();
     protocolInit(&protocolData_t);
-    Pump_Init(0x01);
-    Pump_Start(0x01);
+
     while (1)
     {
+        // Pump_Init(0x01);
+        Pump_Start(0x01);
+        delay(50);
     }
 }

@@ -1,8 +1,4 @@
 #include "Driver_protocol.h"
-#define writeOneReg 0x06
-#define writeMutiReg 0x10
-#define readReg_unchan 0x03
-#define readReg_chan 0x04
 
 ProtocolInfo ProtocolInfo_t[] = ProtocolListInfo;
 int protocolListSize = sizeof(ProtocolInfo_t) / sizeof(ProtocolInfo);
@@ -41,20 +37,19 @@ uint8_t getOffset(uint16_t index)
 void getCRC16(uint8_t *data, uint8_t length)
 {
   uint16_t CRC16 = 0xffff;
-  uint16_t ploy = 0x8005;
-  int i = length;
-  while (i--)
+  uint16_t ploy = 0xA001;
+  for (int i = 0; i < length; i++)
   {
-    CRC16 ^= (*(data + length - i) << 8);
-    for (int i = 0; i < 8; i++)
+    CRC16 ^= *(data + i);
+    for (int j = 0; j < 8; j++)
     {
-      if (CRC16 & 0x8000)
+      if (CRC16 & 0x0001)
       {
-        CRC16 = (CRC16 << 1) ^ ploy;
+        CRC16 = (CRC16 >> 1) ^ ploy;
       }
       else
       {
-        CRC16 << 1;
+        CRC16 >>= 1;
       }
     }
   }
@@ -88,34 +83,32 @@ void reverse(uint8_t *data, uint8_t length)
   }
 }
 
-uint8_t *protocolPack(uint8_t *data, uint8_t id, uint8_t operation)
+void protocolPack(uint8_t *buffer, uint8_t *data, uint8_t id, uint8_t operation)
 {
   uint8_t length = getlength(operation);
-  uint8_t data_re[length];
-  data_re[0] = id;
-  data_re[1] = operation;
-  data_re[2] = data[0];
-  data_re[3] = data[1];
+  buffer[0] = id;
+  buffer[1] = operation;
+  buffer[2] = data[0];
+  buffer[3] = data[1];
   if (operation == writeMutiReg)
   {
-    data_re[4] = 0x02;
-    data_re[5] = 0x00;
-    data_re[6] = 0x04;
+    buffer[4] = 0x02;
+    buffer[5] = 0x00;
+    buffer[6] = 0x04;
     for (int i = 1; i < 5; i++)
     {
-      data_re[6 + i] = data[1 + i];
+      buffer[6 + i] = data[1 + i];
     }
   }
   else
   {
     for (int i = 1; i < 3; i++)
     {
-      data_re[3 + i] = data[1 + i];
+      buffer[3 + i] = data[1 + i];
     }
   }
-  reverse(data_re, length - 2);
-  getCRC16(data_re, length - 2);
-  return data_re;
+  reverse(buffer, length - 2);
+  getCRC16(buffer, length - 2);
 }
 
 uint8_t getlength(uint8_t operation)

@@ -11,10 +11,14 @@ void usart1Init()
   GPIO_InitTypeDef_t.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(GPIOB, &GPIO_InitTypeDef_t);
 
+  GPIO_InitTypeDef_t.GPIO_Pin = GPIO_Pin_7;
+  GPIO_InitTypeDef_t.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  GPIO_Init(GPIOB, &GPIO_InitTypeDef_t);
+
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
   GPIO_PinRemapConfig(GPIO_Remap_USART1, ENABLE);
 
-  RCC_APB1PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
   USART_InitTypeDef USART_InitTypeDef_t;
   USART_InitTypeDef_t.USART_BaudRate = 115200;
   USART_InitTypeDef_t.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
@@ -23,12 +27,21 @@ void usart1Init()
   USART_InitTypeDef_t.USART_StopBits = USART_StopBits_1;
   USART_InitTypeDef_t.USART_WordLength = USART_WordLength_8b;
   USART_Init(USART1, &USART_InitTypeDef_t);
+
+  USART_Cmd(USART1, ENABLE);
 }
 
 void usart1Send(uint8_t *data, uint8_t id, uint8_t operation)
 {
   uart1DMA_DISABLE();
+  uint8_t length = getlength(operation);
+  uint8_t buffer[length];
+  protocolPack(buffer, data, id, operation);
   uart1DMA_ENABLE(
-      protocolPack(data, id, operation),
-      getlength(operation));
+      buffer,
+      length);
+  while (!DMA_GetFlagStatus(DMA1_FLAG_TC4))
+  {
+    /* code */
+  }
 }
