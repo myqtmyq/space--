@@ -11,4 +11,6 @@
 #endif
 
 __HANDLE_EXT protocolData protocolData_t;
+__HANDLE_EXT uint8_t usart1_lock;
+__HANDLE_EXT uint8_t USART1_RX_Buffer[32];
 #endif

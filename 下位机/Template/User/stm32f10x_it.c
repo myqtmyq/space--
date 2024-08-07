@@ -260,8 +260,16 @@ void EXTI15_10_IRQHandler(void)
 /* USART1???? */
 void USART1_IRQHandler(void)
 {
-    //    if (USART_GetITStatus(USART1, UART1_ITFLAG) != RESET) {
-    //  }
+    // clear it_IDIE_flag
+    int temp;
+    temp = USART1->DR;
+    temp = USART1->SR;
+
+    uart1RX_DMA_DISABLE();
+
+    // unpack
+    usart1_lock = 0;
+    uart1RX_DMA_ENABLE(USART1_RX_Buffer);
 }
 
 /**
