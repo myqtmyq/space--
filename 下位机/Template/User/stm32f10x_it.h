@@ -33,6 +33,8 @@ extern "C"
 #include "Canopen.h"
 #include "Can.h"
 #include "UART.h"
+#include "BSP_DMA.h"
+#include "Handle.h"
 
   /* Exported types ------------------------------------------------------------*/
   /* Exported constants --------------------------------------------------------*/

@@ -4,4 +4,6 @@
 
 void uart1DMA_ENABLE(uint8_t *data, uint8_t length);
 void uart1DMA_DISABLE();
+void uart1RX_DMA_DISABLE();
+void uart1RX_DMA_ENABLE(uint8_t *data);
 #endif

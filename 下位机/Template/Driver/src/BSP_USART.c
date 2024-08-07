@@ -29,10 +29,19 @@ void usart1Init()
   USART_Init(USART1, &USART_InitTypeDef_t);
 
   USART_Cmd(USART1, ENABLE);
+
+  NVIC_InitTypeDef NVIC_InitTypeDef_t;
+  NVIC_InitTypeDef_t.NVIC_IRQChannel = USART1_IRQn;
+  NVIC_InitTypeDef_t.NVIC_IRQChannelPreemptionPriority = 2;
+  NVIC_InitTypeDef_t.NVIC_IRQChannelSubPriority = 0;
+  NVIC_InitTypeDef_t.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&NVIC_InitTypeDef_t);
+  USART_ITConfig(USART1, USART_IT_IDLE, ENABLE);
 }
 
 void usart1Send(uint8_t *data, uint8_t id, uint8_t operation)
 {
+  usart1_lock = 1;
   uart1DMA_DISABLE();
   uint8_t length = getlength(operation);
   uint8_t buffer[length];
@@ -40,7 +49,7 @@ void usart1Send(uint8_t *data, uint8_t id, uint8_t operation)
   uart1DMA_ENABLE(
       buffer,
       length);
-  while (!DMA_GetFlagStatus(DMA1_FLAG_TC4))
+  while (!DMA_GetFlagStatus(DMA1_FLAG_TC4) || usart1_lock)
   {
     /* code */
   }

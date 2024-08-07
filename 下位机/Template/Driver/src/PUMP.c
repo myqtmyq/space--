@@ -25,15 +25,16 @@ void Pump_ModeUnit(int id)
 void Pump_Speed(int id, int32_t speed, uint32_t acceleration)
 {
     protocolData_t.targetSpeed_t.targetSpeed = speed;
-    usart1Send(protocolData_t.targetSpeed_t.data, id, writeMutiReg);
-    delay(50);
     protocolData_t.acceleration_t.acceleration = acceleration;
     usart1Send(protocolData_t.acceleration_t.data, id, writeMutiReg);
+    delay(50);
+    usart1Send(protocolData_t.targetSpeed_t.data, id, writeMutiReg);
 }
 
 void Pump_Start(int id)
 {
     protocolData_t.controlBit_t.start = 1;
+    protocolData_t.controlBit_t.enable = 0;
     usart1Send(protocolData_t.controlBit_t.data, id, writeOneReg);
 }
 
@@ -50,5 +51,5 @@ void Pump_Init(int id)
     delay(50);
     Pump_ModeUnit(id);
     delay(50);
-    Pump_Speed(id, 60, 400);
+    Pump_Speed(id, 60000, 4000);
 }
