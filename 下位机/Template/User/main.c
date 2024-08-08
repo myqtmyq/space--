@@ -19,5 +19,6 @@ int main()
     Pump_Start(0x01);
     while (1)
     {
+        delay(50);
     }
 }
