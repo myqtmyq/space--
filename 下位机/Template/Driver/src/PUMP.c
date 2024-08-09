@@ -15,7 +15,7 @@ void Pump_Mode(int id, PumpStateTypeDef state)
 
 void Pump_ModeUnit(int id)
 {
-    protocolData_t.motorUnit_t.locationUnit = 1;
+    protocolData_t.motorUnit_t.locationUnit = 0;
     protocolData_t.motorUnit_t.speedUnit = 1;
     protocolData_t.motorUnit_t.timeUnit = 0;
     usart1Send(protocolData_t.motorUnit_t.data, id, writeMutiReg);
@@ -34,7 +34,6 @@ void Pump_Speed(int id, int32_t speed, uint32_t acceleration)
 void Pump_Start(int id)
 {
     protocolData_t.controlBit_t.start = 1;
-    protocolData_t.controlBit_t.enable = 0;
     usart1Send(protocolData_t.controlBit_t.data, id, writeOneReg);
 }
 
@@ -51,5 +50,5 @@ void Pump_Init(int id)
     delay(50);
     Pump_ModeUnit(id);
     delay(50);
-    Pump_Speed(id, 60000, 4000);
+    Pump_Speed(id, 10000, 10000);
 }

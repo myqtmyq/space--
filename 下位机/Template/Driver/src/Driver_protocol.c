@@ -77,7 +77,7 @@ void reverse(uint8_t *data, uint8_t length)
     for (int j = 0; j < i; j++)
     {
       temp = *(data + 7 + j);
-      *(data + 7 + j) = *(data + length - j);
+      *(data + 7 + j) = *(data + length - 1 - j);
       *(data + length - 1 - j) = temp;
     }
   }
