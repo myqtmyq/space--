@@ -15,10 +15,24 @@ int main()
     protocolInit(&protocolData_t);
     delay(2000);
     Pump_Init(0x01);
+    delay(1000);
+    Pump_Init(0x02);
+    delay(1000);
+    Pump_Init(0x03);
     delay(2000);
-    Pump_Start(0x01);
     while (1)
     {
-        delay(50);
+        Pump_Start(0x01);
+        delay(2000);
+        Pump_Start(0x02);
+        delay(2000);
+        Pump_Start(0x03);
+        delay(30000);
+        Pump_Stop(0x01);
+        delay(2000);
+        Pump_Stop(0x02);
+        delay(2000);
+        Pump_Stop(0x03);
+        delay(10000);
     }
 }
