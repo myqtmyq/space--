@@ -52,3 +52,8 @@ void Pump_Init(int id)
     delay(50);
     Pump_Speed(id, 10000, 10000);
 }
+
+void Pump_Read()
+{
+    usart1Send(protocolData_t.realSpeed_t.data, 0x01, readReg_unchan);
+}

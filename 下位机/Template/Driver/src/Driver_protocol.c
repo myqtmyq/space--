@@ -100,6 +100,19 @@ void protocolPack(uint8_t *buffer, uint8_t *data, uint8_t id, uint8_t operation)
       buffer[6 + i] = data[1 + i];
     }
   }
+  else if (operation == readReg_chan || operation == readReg_unchan)
+  {
+    if (!(0x1000 ^ id))
+    {
+      buffer[4] = 0x00;
+      buffer[5] = 0x01;
+    }
+    else
+    {
+      buffer[4] = 0x00;
+      buffer[5] = 0x02;
+    }
+  }
   else
   {
     for (int i = 1; i < 3; i++)
@@ -120,6 +133,12 @@ uint8_t getlength(uint8_t operation)
     break;
   case writeMutiReg:
     return 0x0D;
+    break;
+  case readReg_chan:
+    return 0x08;
+    break;
+  case readReg_unchan:
+    return 0x08;
     break;
   default:
     return -1;
