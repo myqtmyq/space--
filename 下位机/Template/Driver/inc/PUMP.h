@@ -18,6 +18,8 @@ typedef enum
 } PumpStateTypeDef;
 
 void Pump_Init(int id);
+void Pump_Zero(int id);
+void Pump_Location(int id,int location);
 void Pump_Start(int id);
 void Pump_Stop(int id);
 
