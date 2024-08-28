@@ -3,6 +3,7 @@
 #include "stm32f10x.h"
 #include "Driver_protocol.h"
 #include "protocol.h"
+#include "Menu.h"
 
 #ifdef __HANDLE_GLOBALS
 #define __HANDLE_EXT
@@ -13,4 +14,10 @@
 __HANDLE_EXT protocolData protocolData_t;
 __HANDLE_EXT uint8_t usart1_lock;
 __HANDLE_EXT uint8_t USART1_RX_Buffer[32];
+
+__HANDLE_EXT menu home;
+__HANDLE_EXT menu recipe;
+__HANDLE_EXT menu customize;
+__HANDLE_EXT menu detailRecipe;
+__HANDLE_EXT menu RecipeEditor;
 #endif
