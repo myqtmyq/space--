@@ -71,7 +71,7 @@ void spi1TX_DMA_Init()
   SPI_I2S_DMACmd(SPI1, SPI_I2S_DMAReq_Tx, ENABLE);
 }
 
-void spi1TX_DMA_ENABLE(uint8_t *data, uint8_t *perAddr,uint16_t length)
+void spi1TX_DMA_ENABLE(uint8_t *data, uint8_t *perAddr, uint16_t length)
 {
   DMA1_Channel3->CNDTR = length;
   DMA1_Channel3->CMAR = data;
@@ -80,12 +80,8 @@ void spi1TX_DMA_ENABLE(uint8_t *data, uint8_t *perAddr,uint16_t length)
   DMA_Cmd(DMA1_Channel3, ENABLE);
 }
 
-void spi1TX_DMA_DISABLE()
+void spi1RX_DMA_Init()
 {
-  DMA_Cmd(DMA1_Channel3, DISABLE);
-}
-
-void spi1RX_DMA_Init(){
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
   DMA_InitTypeDef DMA_InitTypeDef_t;
   DMA_InitTypeDef_t.DMA_M2M = DMA_M2M_Disable;
@@ -99,7 +95,8 @@ void spi1RX_DMA_Init(){
   SPI_I2S_DMACmd(SPI1, SPI_I2S_DMAReq_Rx, ENABLE);
 }
 
-void spi1RX_DMA_ENABLE(uint8_t *data, uint8_t* perAddr, uint16_t length) {
+void spi1RX_DMA_ENABLE(uint8_t *data, uint8_t *perAddr, uint16_t length)
+{
   DMA1_Channel2->CNDTR = length;
   DMA1_Channel2->CMAR = data;
   DMA1_Channel2->CPAR = perAddr;
@@ -107,11 +104,13 @@ void spi1RX_DMA_ENABLE(uint8_t *data, uint8_t* perAddr, uint16_t length) {
   DMA_Cmd(DMA1_Channel2, ENABLE);
 }
 
-void spi1RX_DMA_DISABLE() {
+void spi1_DMA_DISABLE()
+{
   DMA_Cmd(DMA1_Channel2, DISABLE);
 }
 
-void usart3TX_DMA_Init() {
+void usart3TX_DMA_Init()
+{
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
   DMA_InitTypeDef DMA_InitTypeDef_t;
   DMA_InitTypeDef_t.DMA_M2M = DMA_M2M_Disable;
@@ -125,7 +124,8 @@ void usart3TX_DMA_Init() {
   USART_DMACmd(USART3, USART_DMAReq_Tx, ENABLE);
 }
 
-void usart3RX_DMA_Init() {
+void usart3RX_DMA_Init()
+{
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
   DMA_InitTypeDef DMA_InitTypeDef_t;
   DMA_InitTypeDef_t.DMA_M2M = DMA_M2M_Disable;
@@ -137,4 +137,27 @@ void usart3RX_DMA_Init() {
   DMA_InitTypeDef_t.DMA_Priority = DMA_Priority_High;
   DMA_Init(DMA1_Channel2, &DMA_InitTypeDef_t);
   USART_DMACmd(USART3, USART_DMAReq_Rx, ENABLE);
+}
+
+void usart3TX_DMA_ENABLE(uint8_t *data, uint8_t *perAddr, uint16_t length)
+{
+  DMA1_Channel2->CNDTR = length;
+  DMA1_Channel2->CMAR = data;
+  DMA1_Channel2->CPAR = perAddr;
+  DMA1_Channel2->CCR |= DMA_DIR_PeripheralDST;
+  DMA_Cmd(DMA1_Channel2, ENABLE);
+}
+
+void usart3RX_DMA_ENABLE(uint8_t *data, uint8_t *perAddr, uint16_t length)
+{
+  DMA1_Channel2->CNDTR = length;
+  DMA1_Channel2->CMAR = data;
+  DMA1_Channel2->CPAR = perAddr;
+  DMA1_Channel2->CCR |= DMA_DIR_PeripheralSRC;
+  DMA_Cmd(DMA1_Channel2, ENABLE);
+}
+
+void usart3_DMA_DISABLE()
+{
+  DMA_Cmd(DMA1_Channel2, DISABLE);
 }

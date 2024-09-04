@@ -5,7 +5,8 @@
 typedef struct
 {
   pMenu preMenu;
-  pModulePart *pModulePartGroup;
+  pModulePart pModulePartFirst;
+  pModulePart CurrentModulePart;
 } menu;
 
 typedef menu *pMenu;
@@ -13,8 +14,7 @@ typedef menu *pMenu;
 typedef struct
 {
   uint32_t *pflashData;
-  pModulePartData modulePartData_t;
-  uint8_t labelNum;
+  pModulePart NextModulePart;
   pMenu subMenu;
   uint8_t changeEnabled;
 } modulePart;

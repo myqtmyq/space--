@@ -2,21 +2,18 @@
 
 void usart1Init()
 {
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
   GPIO_InitTypeDef GPIO_InitTypeDef_t;
-  GPIO_DeInit(GPIOB);
-  GPIO_InitTypeDef_t.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
+  GPIO_DeInit(GPIOA);
+  GPIO_InitTypeDef_t.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10;
   GPIO_InitTypeDef_t.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitTypeDef_t.GPIO_Mode = GPIO_Mode_AF_PP;
-  GPIO_Init(GPIOB, &GPIO_InitTypeDef_t);
+  GPIO_Init(GPIOA, &GPIO_InitTypeDef_t);
 
-  GPIO_InitTypeDef_t.GPIO_Pin = GPIO_Pin_7;
+  GPIO_InitTypeDef_t.GPIO_Pin = GPIO_Pin_10;
   GPIO_InitTypeDef_t.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-  GPIO_Init(GPIOB, &GPIO_InitTypeDef_t);
-
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-  GPIO_PinRemapConfig(GPIO_Remap_USART1, ENABLE);
+  GPIO_Init(GPIOA, &GPIO_InitTypeDef_t);
 
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
   USART_InitTypeDef USART_InitTypeDef_t;

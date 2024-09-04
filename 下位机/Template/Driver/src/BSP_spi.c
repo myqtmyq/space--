@@ -25,3 +25,24 @@ void BSP_spi_Init()
   SPI_Init(SPI1, &SPI_InitTypeDef_t);
   SPI_Cmd(SPI1, ENABLE);
 }
+
+void spi1_send(uint8_t *bufferTX, uint16_t lengthTX, uint8_t receiveEnable, uint8_t *bufferRX, uint16_t lengthRX)
+{
+  spi1TX_DMA_ENABLE(bufferTX, &(SPI1->DR), lengthTX);
+  while (!DMA_GetFlagStatus(DMA1_FLAG_TC3))
+  {
+    /* code */
+  }
+  if (receiveEnable)
+  {
+    spi1_receive(bufferRX, lengthRX);
+  }
+  spi1_DMA_DISABLE();
+}
+
+void spi1_receive(uint8_t *bufferRX, uint16_t lengthRX)
+{
+  spi1RX_DMA_ENABLE(bufferRX, &(SPI1->DR), lengthRX);
+  while (!DMA_GetFlagStatus(DMA1_FLAG_TC2))
+    ;
+}
