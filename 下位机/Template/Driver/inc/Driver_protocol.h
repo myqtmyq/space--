@@ -1,7 +1,7 @@
 #ifndef __DRIVER_PROTOCOL_H
 #define __DRIVER_PROTOCOL_H
 #include "stm32f10x.h"
-#include "protocol.h"
+#include "protocol_v2.h"
 
 #define writeOneReg 0x06
 #define writeMutiReg 0x10

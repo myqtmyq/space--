@@ -53,8 +53,8 @@ void getCRC16(uint8_t *data, uint8_t length)
       }
     }
   }
-  *(data + length) = CRC16 & 0xff;
-  *(data + length + 1) = (CRC16 >> 8) & 0xff;
+  *(data + length) = (CRC16 & 0xff00) >> 8;
+  *(data + length + 1) = CRC16 & 0xff;
 }
 
 /* @param length -> exclusive CRC's 2 bytes*/
