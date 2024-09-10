@@ -12,8 +12,9 @@
 #endif
 
 __HANDLE_EXT protocolData protocolData_t;
-__HANDLE_EXT uint8_t usart1_lock;
-__HANDLE_EXT uint8_t USART1_RX_Buffer[32];
+__HANDLE_EXT uint8_t usart3_lock;
+__HANDLE_EXT uint8_t USART3_RX_Buffer[32];
+__HANDLE_EXT uint8_t USART2_RX_Buffer[48];
 
 __HANDLE_EXT menu home;
 __HANDLE_EXT menu recipe;

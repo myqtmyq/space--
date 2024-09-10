@@ -268,8 +268,6 @@ void USART1_IRQHandler(void)
     uart1RX_DMA_DISABLE();
 
     // unpack
-    usart1_lock = 0;
-    uart1RX_DMA_ENABLE(USART1_RX_Buffer);
 }
 
 /**
@@ -290,6 +288,20 @@ void USART2_IRQHandler(void)
         USART_ClearITPendingBit(USART2, UART2_ITFLAG);
     }
     */
+}
+
+void USART3_IRQHandler(void)
+{
+    // clear it_IDIE_flag
+    int temp;
+    temp = USART1->DR;
+    temp = USART1->SR;
+
+    usart3_DMA_DISABLE();
+
+    // unpack
+    usart3_lock = 0;
+    usart3RX_DMA_ENABLE(USART3_RX_Buffer, &(USART3->DR), 32);
 }
 
 /**
