@@ -158,6 +158,10 @@ Section Cross References
     driver_protocol.o(i.protocolPack) refers to driver_protocol.o(i.getCRC16) for getCRC16
     pump.o(i.Pump_Enable) refers to bsp_usart.o(i.usart3Send) for usart3Send
     pump.o(i.Pump_Enable) refers to main.o(.bss) for protocolData_t
+    pump.o(i.Pump_Init) refers to bsp_usart.o(i.usart3Send) for usart3Send
+    pump.o(i.Pump_Init) refers to main.o(.bss) for protocolData_t
+    pump.o(i.Pump_pStart) refers to bsp_usart.o(i.usart3Send) for usart3Send
+    pump.o(i.Pump_pStart) refers to main.o(.bss) for protocolData_t
     bsp_usart.o(i.usart1Init) refers to stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
     bsp_usart.o(i.usart1Init) refers to stm32f10x_gpio.o(i.GPIO_DeInit) for GPIO_DeInit
     bsp_usart.o(i.usart1Init) refers to stm32f10x_gpio.o(i.GPIO_Init) for GPIO_Init
@@ -749,6 +753,8 @@ Removing Unused input sections from the image.
     Removing uart.o(i.BSP_UART1_CFG), (176 bytes).
     Removing uart.o(i.fputc), (36 bytes).
     Removing driver_protocol.o(i.getOffset), (48 bytes).
+    Removing pump.o(i.Pump_Init), (176 bytes).
+    Removing pump.o(i.Pump_pStart), (56 bytes).
     Removing bsp_usart.o(i.usart1Init), (180 bytes).
     Removing bsp_usart.o(i.usart1Send), (62 bytes).
     Removing bsp_dma.o(i.spi1RX_DMA_ENABLE), (40 bytes).
@@ -767,7 +773,7 @@ Removing Unused input sections from the image.
     Removing bsp_spi.o(i.spi1_receive), (36 bytes).
     Removing bsp_spi.o(i.spi1_send), (64 bytes).
 
-471 unused section(s) (total 19024 bytes) removed from the image.
+473 unused section(s) (total 19256 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1109,18 +1115,18 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x000000ec   Data   RO            3    RESET               startup_stm32f10x_md.o
-    0x080000ec   0x080000ec   0x00000000   Code   RO         3825  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x080000ec   0x080000ec   0x00000004   Code   RO         3856    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x080000f0   0x080000f0   0x00000004   Code   RO         3859    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x080000f4   0x080000f4   0x00000000   Code   RO         3861    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x080000f4   0x080000f4   0x00000000   Code   RO         3863    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x080000f4   0x080000f4   0x00000008   Code   RO         3864    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x080000fc   0x080000fc   0x00000004   Code   RO         3871    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
-    0x08000100   0x08000100   0x00000000   Code   RO         3866    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
-    0x08000100   0x08000100   0x00000000   Code   RO         3868    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
-    0x08000100   0x08000100   0x00000004   Code   RO         3857    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x080000ec   0x080000ec   0x00000000   Code   RO         3837  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x080000ec   0x080000ec   0x00000004   Code   RO         3868    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x080000f0   0x080000f0   0x00000004   Code   RO         3871    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x080000f4   0x080000f4   0x00000000   Code   RO         3873    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x080000f4   0x080000f4   0x00000000   Code   RO         3875    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x080000f4   0x080000f4   0x00000008   Code   RO         3876    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x080000fc   0x080000fc   0x00000004   Code   RO         3883    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
+    0x08000100   0x08000100   0x00000000   Code   RO         3878    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
+    0x08000100   0x08000100   0x00000000   Code   RO         3880    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
+    0x08000100   0x08000100   0x00000004   Code   RO         3869    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x08000104   0x08000104   0x00000024   Code   RO            4    .text               startup_stm32f10x_md.o
-    0x08000128   0x08000128   0x00000024   Code   RO         3878    .text               mc_w.l(init.o)
+    0x08000128   0x08000128   0x00000024   Code   RO         3890    .text               mc_w.l(init.o)
     0x0800014c   0x0800014c   0x00000004   Code   RO          212    i.BusFault_Handler  stm32f10x_it.o
     0x08000150   0x08000150   0x000000a8   Code   RO          711    i.CAN_ClearITPendingBit  stm32f10x_can.o
     0x080001f8   0x080001f8   0x00000120   Code   RO          717    i.CAN_GetITStatus   stm32f10x_can.o
@@ -1177,30 +1183,30 @@ Memory Map of the image
     0x08000ccc   0x08000ccc   0x000000d8   Code   RO         3207    i.USART_Init        stm32f10x_usart.o
     0x08000da4   0x08000da4   0x00000028   Code   RO          230    i.USB_LP_CAN1_RX0_IRQHandler  stm32f10x_it.o
     0x08000dcc   0x08000dcc   0x00000004   Code   RO          231    i.UsageFault_Handler  stm32f10x_it.o
-    0x08000dd0   0x08000dd0   0x0000000e   Code   RO         3882    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08000dde   0x08000dde   0x00000002   Code   RO         3883    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08000de0   0x08000de0   0x0000000e   Code   RO         3884    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08000dd0   0x08000dd0   0x0000000e   Code   RO         3894    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x08000dde   0x08000dde   0x00000002   Code   RO         3895    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08000de0   0x08000de0   0x0000000e   Code   RO         3896    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x08000dee   0x08000dee   0x00000002   PAD
     0x08000df0   0x08000df0   0x00000018   Code   RO         3495    i.delay             systick.o
-    0x08000e08   0x08000e08   0x00000050   Code   RO         3828    i.free              mc_w.l(malloc.o)
+    0x08000e08   0x08000e08   0x00000050   Code   RO         3840    i.free              mc_w.l(malloc.o)
     0x08000e58   0x08000e58   0x0000003c   Code   RO         3542    i.getCRC16          driver_protocol.o
     0x08000e94   0x08000e94   0x00000028   Code   RO         3544    i.getlength         driver_protocol.o
     0x08000ebc   0x08000ebc   0x00000030   Code   RO          176    i.main              main.o
-    0x08000eec   0x08000eec   0x0000006c   Code   RO         3829    i.malloc            mc_w.l(malloc.o)
+    0x08000eec   0x08000eec   0x0000006c   Code   RO         3841    i.malloc            mc_w.l(malloc.o)
     0x08000f58   0x08000f58   0x00000068   Code   RO         3545    i.protocolInit      driver_protocol.o
     0x08000fc0   0x08000fc0   0x00000094   Code   RO         3546    i.protocolPack      driver_protocol.o
     0x08001054   0x08001054   0x00000046   Code   RO         3547    i.reverse           driver_protocol.o
     0x0800109a   0x0800109a   0x00000002   PAD
-    0x0800109c   0x0800109c   0x00000010   Code   RO         3657    i.uart1RX_DMA_DISABLE  bsp_dma.o
-    0x080010ac   0x080010ac   0x000000a8   Code   RO         3612    i.usart2Init        bsp_usart.o
-    0x08001154   0x08001154   0x000000ac   Code   RO         3613    i.usart3Init        bsp_usart.o
-    0x08001200   0x08001200   0x00000028   Code   RO         3659    i.usart3RX_DMA_ENABLE  bsp_dma.o
-    0x08001228   0x08001228   0x00000044   Code   RO         3660    i.usart3RX_DMA_Init  bsp_dma.o
-    0x0800126c   0x0800126c   0x0000005c   Code   RO         3614    i.usart3Send        bsp_usart.o
-    0x080012c8   0x080012c8   0x0000002c   Code   RO         3661    i.usart3TX_DMA_ENABLE  bsp_dma.o
-    0x080012f4   0x080012f4   0x00000044   Code   RO         3662    i.usart3TX_DMA_Init  bsp_dma.o
-    0x08001338   0x08001338   0x00000010   Code   RO         3663    i.usart3_DMA_DISABLE  bsp_dma.o
-    0x08001348   0x08001348   0x00000020   Data   RO         3880    Region$$Table       anon$$obj.o
+    0x0800109c   0x0800109c   0x00000010   Code   RO         3669    i.uart1RX_DMA_DISABLE  bsp_dma.o
+    0x080010ac   0x080010ac   0x000000a8   Code   RO         3624    i.usart2Init        bsp_usart.o
+    0x08001154   0x08001154   0x000000ac   Code   RO         3625    i.usart3Init        bsp_usart.o
+    0x08001200   0x08001200   0x00000028   Code   RO         3671    i.usart3RX_DMA_ENABLE  bsp_dma.o
+    0x08001228   0x08001228   0x00000044   Code   RO         3672    i.usart3RX_DMA_Init  bsp_dma.o
+    0x0800126c   0x0800126c   0x0000005c   Code   RO         3626    i.usart3Send        bsp_usart.o
+    0x080012c8   0x080012c8   0x0000002c   Code   RO         3673    i.usart3TX_DMA_ENABLE  bsp_dma.o
+    0x080012f4   0x080012f4   0x00000044   Code   RO         3674    i.usart3TX_DMA_Init  bsp_dma.o
+    0x08001338   0x08001338   0x00000010   Code   RO         3675    i.usart3_DMA_DISABLE  bsp_dma.o
+    0x08001348   0x08001348   0x00000020   Data   RO         3892    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001368, Size: 0x00000708, Max: 0x00002800, ABSOLUTE)
@@ -1213,8 +1219,8 @@ Memory Map of the image
     0x20000018   0x08001380   0x00000004   Data   RW          232    .data               stm32f10x_it.o
     0x2000001c   0x08001384   0x00000014   Data   RW         2031    .data               stm32f10x_rcc.o
     0x20000030   0x08001398   0x00000040   Data   RW         3548    .data               driver_protocol.o
-    0x20000070   0x080013d8   0x00000004   Data   RW         3876    .data               mc_w.l(mvars.o)
-    0x20000074   0x080013dc   0x00000004   Data   RW         3877    .data               mc_w.l(mvars.o)
+    0x20000070   0x080013d8   0x00000004   Data   RW         3888    .data               mc_w.l(mvars.o)
+    0x20000074   0x080013dc   0x00000004   Data   RW         3889    .data               mc_w.l(mvars.o)
     0x20000078        -       0x00000090   Zero   RW          177    .bss                main.o
     0x20000108        -       0x00000200   Zero   RW            2    HEAP                startup_stm32f10x_md.o
     0x20000308        -       0x00000400   Zero   RW            1    STACK               startup_stm32f10x_md.o

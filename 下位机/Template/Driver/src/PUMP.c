@@ -29,7 +29,7 @@ void Pump_Init(int id)
 void Pump_pStart(int id, int pTarget)
 {
     protocolData_t.pTarget_t.pTarget = pTarget;
-    usart3send(protocolData_t.pTarget_t.data, id, writeMutiReg);
+    usart3Send(protocolData_t.pTarget_t.data, id, writeMutiReg);
     protocolData_t.ctrlBit_t.pCrtl = 1;
     usart3Send(protocolData_t.ctrlBit_t.data, id, writeOneReg);
 }
