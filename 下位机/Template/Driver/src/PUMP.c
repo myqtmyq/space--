@@ -16,7 +16,7 @@ void Pump_Init(int id)
     protocolData_t.pDecTime_t.pDecTime = 200;
     usart3Send(protocolData_t.pDecTime_t.data, id, writeOneReg);
     protocolData_t.pRunSpeed_t.pRunSpeed = 200;
-    usart3Send(protocolData_t.pRunSpeed_t.data, writeOneReg);
+    usart3Send(protocolData_t.pRunSpeed_t.data, id, writeOneReg);
     protocolData_t.ctrlBit_t.pMode = 0;
     protocolData_t.ctrlBit_t.changeMode = 1;
     protocolData_t.ctrlBit_t.JOGctrl = 0;
