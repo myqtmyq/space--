@@ -1,6 +1,6 @@
 #include "Driver_protocol.h"
 
-ProtocolInfo ProtocolInfo_t[] = ProtocolListInfo;
+ProtocolInfo ProtocolInfo_t[] = protocolInfoList;
 int protocolListSize = sizeof(ProtocolInfo_t) / sizeof(ProtocolInfo);
 
 void protocolInit(protocolData *protocolData_t)

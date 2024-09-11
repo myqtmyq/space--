@@ -2,7 +2,7 @@
 #define __PROTOCOL_H
 #include "stm32f10x.h"
 #pragma pack(1)
-
+#ifdef use_protocol
 /* @attention uint8_t
     value: 0- 8; 0 = 256 fractionize, 1-7 = 128 - 2 , 8 = 1*/
 typedef union
@@ -685,5 +685,7 @@ typedef union
     uint8_t data[188];
   };
 } protocolData;
+
+#endif
 
 #endif

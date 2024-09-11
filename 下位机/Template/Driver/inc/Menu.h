@@ -1,15 +1,15 @@
 #ifndef __MENU_H
 #define __MENU_H
 #include "stm32f10x.h"
-
+typedef modulePart *pModulePart;
+typedef menu *pMenu;
+typedef modulePartData *pModulePartData;
 typedef struct
 {
   pMenu preMenu;
   pModulePart pModulePartFirst;
   pModulePart CurrentModulePart;
 } menu;
-
-typedef menu *pMenu;
 
 typedef struct
 {
@@ -19,29 +19,26 @@ typedef struct
   uint8_t changeEnabled;
 } modulePart;
 
-typedef modulePart *pModulePart;
-
 typedef union
 {
   struct
   {
-    char **charData;
+    char **charData1;
   };
 
   struct
   {
-    char **charData;
-    float data;
+    char **charData2;
+    float data1;
   };
 
   struct
   {
-    char **charData;
+    char **charData3;
     uint8_t id;
-    float data;
+    float data2;
   };
 
 } modulePartData;
-typedef modulePartData *pModulePartData;
 
 #endif

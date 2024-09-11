@@ -338,7 +338,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F10X_LD</Define>
+              <Define>USE_STDPERIPH_DRIVER, STM32F10X_MD</Define>
               <Undefine></Undefine>
               <IncludePath>..\User;..\Library\STM32F10x_StdPeriph_Driver\inc;..\Library\CMSIS\CM3;..\..\MyLibrary\inc;..\Driver\inc;..\Library\PROTOCOL;..\Library</IncludePath>
             </VariousControls>
@@ -385,9 +385,9 @@
           <GroupName>STARTUP</GroupName>
           <Files>
             <File>
-              <FileName>startup_stm32f10x_ld.s</FileName>
+              <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Library\CMSIS\CM3\startup\startup_stm32f10x_ld.s</FilePath>
+              <FilePath>..\Library\CMSIS\CM3\startup\startup_stm32f10x_md.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -596,6 +596,21 @@
               <FileName>BSP_DMA.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Driver\src\BSP_DMA.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\src\BSP_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_LCD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\src\BSP_LCD.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\src\BSP_spi.c</FilePath>
             </File>
           </Files>
         </Group>

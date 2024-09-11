@@ -90,7 +90,7 @@ void usart3Send(uint8_t *data, uint8_t id, uint8_t operation)
   uint8_t buffer[length];
   protocolPack(buffer, data, id, operation);
   usart3TX_DMA_ENABLE(buffer, &(USART3->DR), length);
-  while (!DMA_GetFlagStatus(DMA1_FLAG_TC2) || usart3_lock)
+  while (DMA1_Channel2->CNDTR)
   {
     /* code */
   }
