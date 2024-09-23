@@ -19,5 +19,7 @@ typedef enum
 
 void Pump_Init(int id);
 void Pump_Enable(int id);
-void Pump_Start(int id, int pTarget);
+void Pump_pStart(int id, int pTarget);
+void Pump_setId(int id);
+void Key_EXTI_Init();
 #endif

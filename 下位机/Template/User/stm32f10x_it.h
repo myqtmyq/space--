@@ -35,6 +35,7 @@ extern "C"
 #include "UART.h"
 #include "BSP_DMA.h"
 #include "Handle.h"
+#include "PUMP.h"
 
   /* Exported types ------------------------------------------------------------*/
   /* Exported constants --------------------------------------------------------*/

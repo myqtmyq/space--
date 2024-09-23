@@ -13,5 +13,6 @@ __HANDLE_EXT protocolData protocolData_t;
 __HANDLE_EXT uint8_t usart3_lock;
 __HANDLE_EXT uint8_t USART3_RX_Buffer[32];
 __HANDLE_EXT uint8_t USART2_RX_Buffer[48];
+__HANDLE_EXT int testAngle;
 
 #endif

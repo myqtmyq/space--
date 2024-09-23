@@ -148,7 +148,8 @@ void EXTI0_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
-
+        Pump_pStart(0x01, testAngle);
+        testAngle += 15000;
         EXTI_ClearITPendingBit(EXTI_Line0);
     }
 }
@@ -198,7 +199,7 @@ void EXTI9_5_IRQHandler(void)
     }
     if (EXTI_GetITStatus(EXTI_Line6) != RESET)
     {
-
+        testAngle = 15000;
         EXTI_ClearITPendingBit(EXTI_Line6);
     }
     if (EXTI_GetITStatus(EXTI_Line7) != RESET)
@@ -294,8 +295,8 @@ void USART3_IRQHandler(void)
 {
     // clear it_IDIE_flag
     int temp;
-    temp = USART1->DR;
-    temp = USART1->SR;
+    temp = USART3->DR;
+    temp = USART3->SR;
 
     usart3_DMA_DISABLE();
 

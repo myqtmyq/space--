@@ -84,16 +84,17 @@ void usart3Init()
 
 void usart3Send(uint8_t *data, uint8_t id, uint8_t operation)
 {
-  usart3_lock = 1;
+  usart3_lock = 0;
   usart3_DMA_DISABLE();
   uint8_t length = getlength(operation);
   uint8_t buffer[length];
   protocolPack(buffer, data, id, operation);
   usart3TX_DMA_ENABLE(buffer, &(USART3->DR), length);
-  while (DMA1_Channel2->CNDTR)
+  while (DMA1_Channel2->CNDTR || usart3_lock)
   {
     /* code */
   }
+  delay(50);
 }
 
 void usart2Init()
